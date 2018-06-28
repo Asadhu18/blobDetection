@@ -1,6 +1,6 @@
 ﻿namespace blobDetection
 {
-    partial class Form1
+    partial class BlobDetection
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,617 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.videoSourcePlayer1 = new AForge.Controls.VideoSourcePlayer();
+            this.liveVideoSource = new System.Windows.Forms.Label();
+            this.RecordBtn = new System.Windows.Forms.Button();
+            this.videoSourceList = new System.Windows.Forms.ComboBox();
+            this.grayScale = new System.Windows.Forms.Label();
+            this.grayBlobPicturePanel = new CustomTools.ScrollableImagePanel();
+            this.blackandwhitePanel = new CustomTools.ScrollableImagePanel();
+            this.cannyPanel = new CustomTools.ScrollableImagePanel();
+            this.blackandwhiteBlobPanel = new CustomTools.ScrollableImagePanel();
+            this.cannyBlobPanel = new CustomTools.ScrollableImagePanel();
+            this.redSlider = new System.Windows.Forms.HScrollBar();
+            this.blueSlider = new System.Windows.Forms.HScrollBar();
+            this.greenSlider = new System.Windows.Forms.HScrollBar();
+            this.greyScaleBlobLabel = new System.Windows.Forms.Label();
+            this.blackandwhiteLabel = new System.Windows.Forms.Label();
+            this.cannyLabel = new System.Windows.Forms.Label();
+            this.cannyBlobDetection = new System.Windows.Forms.Label();
+            this.blackandwhiteBlobDetectionLabel = new System.Windows.Forms.Label();
+            this.blackandwhiteBlobMinSlider = new System.Windows.Forms.VScrollBar();
+            this.blackandwhiteBlobMaxSlider = new System.Windows.Forms.VScrollBar();
+            this.cannyBlobMaxSlider = new System.Windows.Forms.VScrollBar();
+            this.cannyBlobMinSlider = new System.Windows.Forms.VScrollBar();
+            this.blackandwhiteSlider = new System.Windows.Forms.HScrollBar();
+            this.cannyMinSlider = new System.Windows.Forms.HScrollBar();
+            this.grayBlobMinSlider = new System.Windows.Forms.VScrollBar();
+            this.grayBlobMaxSlider = new System.Windows.Forms.VScrollBar();
+            this.cannyMaxSlider = new System.Windows.Forms.HScrollBar();
+            this.cannyMinimumThreshold = new System.Windows.Forms.Label();
+            this.cannyMaxThreshold = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.blobDetect = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.capturedImagePanel = new CustomTools.ScrollableImagePanel();
+            this.grayScalePanel = new CustomTools.ScrollableImagePanel();
+            this.SuspendLayout();
+            // 
+            // videoSourcePlayer1
+            // 
+            this.videoSourcePlayer1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.videoSourcePlayer1.Location = new System.Drawing.Point(22, 39);
+            this.videoSourcePlayer1.Name = "videoSourcePlayer1";
+            this.videoSourcePlayer1.Size = new System.Drawing.Size(275, 245);
+            this.videoSourcePlayer1.TabIndex = 0;
+            this.videoSourcePlayer1.Text = "videoSourcePlayer1";
+            this.videoSourcePlayer1.VideoSource = null;
+            // 
+            // liveVideoSource
+            // 
+            this.liveVideoSource.AutoSize = true;
+            this.liveVideoSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.liveVideoSource.Location = new System.Drawing.Point(87, 12);
+            this.liveVideoSource.Name = "liveVideoSource";
+            this.liveVideoSource.Size = new System.Drawing.Size(109, 24);
+            this.liveVideoSource.TabIndex = 1;
+            this.liveVideoSource.Text = "Live Video";
+            // 
+            // RecordBtn
+            // 
+            this.RecordBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RecordBtn.Location = new System.Drawing.Point(91, 290);
+            this.RecordBtn.Name = "RecordBtn";
+            this.RecordBtn.Size = new System.Drawing.Size(135, 38);
+            this.RecordBtn.TabIndex = 2;
+            this.RecordBtn.Text = "Begin Recording";
+            this.RecordBtn.UseVisualStyleBackColor = true;
+            this.RecordBtn.Click += new System.EventHandler(this.RecordBtn_Click);
+            // 
+            // videoSourceList
+            // 
+            this.videoSourceList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.videoSourceList.FormattingEnabled = true;
+            this.videoSourceList.Location = new System.Drawing.Point(91, 334);
+            this.videoSourceList.Name = "videoSourceList";
+            this.videoSourceList.Size = new System.Drawing.Size(135, 24);
+            this.videoSourceList.TabIndex = 3;
+            // 
+            // grayScale
+            // 
+            this.grayScale.AutoSize = true;
+            this.grayScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grayScale.Location = new System.Drawing.Point(364, 221);
+            this.grayScale.Name = "grayScale";
+            this.grayScale.Size = new System.Drawing.Size(174, 24);
+            this.grayScale.TabIndex = 5;
+            this.grayScale.Text = "Gray Scale Image";
+            // 
+            // grayBlobPicturePanel
+            // 
+            this.grayBlobPicturePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.grayBlobPicturePanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.grayBlobPicturePanel.Image = null;
+            this.grayBlobPicturePanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.grayBlobPicturePanel.Location = new System.Drawing.Point(965, 267);
+            this.grayBlobPicturePanel.Name = "grayBlobPicturePanel";
+            this.grayBlobPicturePanel.ROTATION = 0F;
+            this.grayBlobPicturePanel.Size = new System.Drawing.Size(233, 205);
+            this.grayBlobPicturePanel.TabIndex = 6;
+            this.grayBlobPicturePanel.Zoom = 1F;
+            // 
+            // blackandwhitePanel
+            // 
+            this.blackandwhitePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.blackandwhitePanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.blackandwhitePanel.Image = null;
+            this.blackandwhitePanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.blackandwhitePanel.Location = new System.Drawing.Point(662, 519);
+            this.blackandwhitePanel.Name = "blackandwhitePanel";
+            this.blackandwhitePanel.ROTATION = 0F;
+            this.blackandwhitePanel.Size = new System.Drawing.Size(233, 205);
+            this.blackandwhitePanel.TabIndex = 7;
+            this.blackandwhitePanel.Zoom = 1F;
+            // 
+            // cannyPanel
+            // 
+            this.cannyPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.cannyPanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.cannyPanel.Image = null;
+            this.cannyPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.cannyPanel.Location = new System.Drawing.Point(658, 31);
+            this.cannyPanel.Name = "cannyPanel";
+            this.cannyPanel.ROTATION = 0F;
+            this.cannyPanel.Size = new System.Drawing.Size(233, 205);
+            this.cannyPanel.TabIndex = 8;
+            this.cannyPanel.Zoom = 1F;
+            // 
+            // blackandwhiteBlobPanel
+            // 
+            this.blackandwhiteBlobPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.blackandwhiteBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.blackandwhiteBlobPanel.Image = null;
+            this.blackandwhiteBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.blackandwhiteBlobPanel.Location = new System.Drawing.Point(956, 519);
+            this.blackandwhiteBlobPanel.Name = "blackandwhiteBlobPanel";
+            this.blackandwhiteBlobPanel.ROTATION = 0F;
+            this.blackandwhiteBlobPanel.Size = new System.Drawing.Size(233, 205);
+            this.blackandwhiteBlobPanel.TabIndex = 9;
+            this.blackandwhiteBlobPanel.Zoom = 1F;
+            this.blackandwhiteBlobPanel.Load += new System.EventHandler(this.scrollableImagePanel4_Load);
+            // 
+            // cannyBlobPanel
+            // 
+            this.cannyBlobPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.cannyBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.cannyBlobPanel.Image = null;
+            this.cannyBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.cannyBlobPanel.Location = new System.Drawing.Point(965, 31);
+            this.cannyBlobPanel.Name = "cannyBlobPanel";
+            this.cannyBlobPanel.ROTATION = 0F;
+            this.cannyBlobPanel.Size = new System.Drawing.Size(233, 205);
+            this.cannyBlobPanel.TabIndex = 10;
+            this.cannyBlobPanel.Zoom = 1F;
+            // 
+            // redSlider
+            // 
+            this.redSlider.Location = new System.Drawing.Point(368, 499);
+            this.redSlider.Name = "redSlider";
+            this.redSlider.Size = new System.Drawing.Size(207, 27);
+            this.redSlider.TabIndex = 11;
+            this.redSlider.Value = 21;
+            // 
+            // blueSlider
+            // 
+            this.blueSlider.Location = new System.Drawing.Point(368, 543);
+            this.blueSlider.Name = "blueSlider";
+            this.blueSlider.Size = new System.Drawing.Size(207, 27);
+            this.blueSlider.TabIndex = 12;
+            this.blueSlider.Value = 7;
+            // 
+            // greenSlider
+            // 
+            this.greenSlider.Location = new System.Drawing.Point(368, 580);
+            this.greenSlider.Name = "greenSlider";
+            this.greenSlider.Size = new System.Drawing.Size(207, 27);
+            this.greenSlider.TabIndex = 13;
+            this.greenSlider.Value = 72;
+            // 
+            // greyScaleBlobLabel
+            // 
+            this.greyScaleBlobLabel.AutoSize = true;
+            this.greyScaleBlobLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.greyScaleBlobLabel.Location = new System.Drawing.Point(998, 246);
+            this.greyScaleBlobLabel.Name = "greyScaleBlobLabel";
+            this.greyScaleBlobLabel.Size = new System.Drawing.Size(166, 16);
+            this.greyScaleBlobLabel.TabIndex = 14;
+            this.greyScaleBlobLabel.Text = "Gray Scale Blob Detection";
+            // 
+            // blackandwhiteLabel
+            // 
+            this.blackandwhiteLabel.AutoSize = true;
+            this.blackandwhiteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blackandwhiteLabel.Location = new System.Drawing.Point(708, 499);
+            this.blackandwhiteLabel.Name = "blackandwhiteLabel";
+            this.blackandwhiteLabel.Size = new System.Drawing.Size(146, 16);
+            this.blackandwhiteLabel.TabIndex = 15;
+            this.blackandwhiteLabel.Text = "Black and White Image";
+            // 
+            // cannyLabel
+            // 
+            this.cannyLabel.AutoSize = true;
+            this.cannyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cannyLabel.Location = new System.Drawing.Point(680, 9);
+            this.cannyLabel.Name = "cannyLabel";
+            this.cannyLabel.Size = new System.Drawing.Size(183, 16);
+            this.cannyLabel.TabIndex = 16;
+            this.cannyLabel.Text = "Canny Edge Detection Image";
+            // 
+            // cannyBlobDetection
+            // 
+            this.cannyBlobDetection.AutoSize = true;
+            this.cannyBlobDetection.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cannyBlobDetection.Location = new System.Drawing.Point(998, 12);
+            this.cannyBlobDetection.Name = "cannyBlobDetection";
+            this.cannyBlobDetection.Size = new System.Drawing.Size(137, 16);
+            this.cannyBlobDetection.TabIndex = 17;
+            this.cannyBlobDetection.Text = "Canny Blob Detection";
+            // 
+            // blackandwhiteBlobDetectionLabel
+            // 
+            this.blackandwhiteBlobDetectionLabel.AutoSize = true;
+            this.blackandwhiteBlobDetectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blackandwhiteBlobDetectionLabel.Location = new System.Drawing.Point(978, 499);
+            this.blackandwhiteBlobDetectionLabel.Name = "blackandwhiteBlobDetectionLabel";
+            this.blackandwhiteBlobDetectionLabel.Size = new System.Drawing.Size(196, 16);
+            this.blackandwhiteBlobDetectionLabel.TabIndex = 18;
+            this.blackandwhiteBlobDetectionLabel.Text = "Black and White Blob Detection";
+            // 
+            // blackandwhiteBlobMinSlider
+            // 
+            this.blackandwhiteBlobMinSlider.Location = new System.Drawing.Point(1216, 519);
+            this.blackandwhiteBlobMinSlider.Maximum = 50;
+            this.blackandwhiteBlobMinSlider.Name = "blackandwhiteBlobMinSlider";
+            this.blackandwhiteBlobMinSlider.Size = new System.Drawing.Size(17, 205);
+            this.blackandwhiteBlobMinSlider.TabIndex = 19;
+            // 
+            // blackandwhiteBlobMaxSlider
+            // 
+            this.blackandwhiteBlobMaxSlider.Location = new System.Drawing.Point(1254, 519);
+            this.blackandwhiteBlobMaxSlider.Minimum = 51;
+            this.blackandwhiteBlobMaxSlider.Name = "blackandwhiteBlobMaxSlider";
+            this.blackandwhiteBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
+            this.blackandwhiteBlobMaxSlider.TabIndex = 20;
+            this.blackandwhiteBlobMaxSlider.Value = 51;
+            // 
+            // cannyBlobMaxSlider
+            // 
+            this.cannyBlobMaxSlider.Location = new System.Drawing.Point(1254, 31);
+            this.cannyBlobMaxSlider.Minimum = 51;
+            this.cannyBlobMaxSlider.Name = "cannyBlobMaxSlider";
+            this.cannyBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
+            this.cannyBlobMaxSlider.TabIndex = 21;
+            this.cannyBlobMaxSlider.Value = 51;
+            // 
+            // cannyBlobMinSlider
+            // 
+            this.cannyBlobMinSlider.Location = new System.Drawing.Point(1216, 31);
+            this.cannyBlobMinSlider.Maximum = 50;
+            this.cannyBlobMinSlider.Name = "cannyBlobMinSlider";
+            this.cannyBlobMinSlider.Size = new System.Drawing.Size(17, 205);
+            this.cannyBlobMinSlider.TabIndex = 22;
+            // 
+            // blackandwhiteSlider
+            // 
+            this.blackandwhiteSlider.Location = new System.Drawing.Point(660, 736);
+            this.blackandwhiteSlider.Maximum = 256;
+            this.blackandwhiteSlider.Minimum = 20;
+            this.blackandwhiteSlider.Name = "blackandwhiteSlider";
+            this.blackandwhiteSlider.Size = new System.Drawing.Size(237, 17);
+            this.blackandwhiteSlider.TabIndex = 23;
+            this.blackandwhiteSlider.Value = 20;
+            // 
+            // cannyMinSlider
+            // 
+            this.cannyMinSlider.Location = new System.Drawing.Point(663, 248);
+            this.cannyMinSlider.Maximum = 80;
+            this.cannyMinSlider.Minimum = 20;
+            this.cannyMinSlider.Name = "cannyMinSlider";
+            this.cannyMinSlider.Size = new System.Drawing.Size(237, 17);
+            this.cannyMinSlider.TabIndex = 24;
+            this.cannyMinSlider.Value = 20;
+            // 
+            // grayBlobMinSlider
+            // 
+            this.grayBlobMinSlider.Location = new System.Drawing.Point(1216, 267);
+            this.grayBlobMinSlider.Maximum = 50;
+            this.grayBlobMinSlider.Name = "grayBlobMinSlider";
+            this.grayBlobMinSlider.Size = new System.Drawing.Size(17, 205);
+            this.grayBlobMinSlider.TabIndex = 25;
+            // 
+            // grayBlobMaxSlider
+            // 
+            this.grayBlobMaxSlider.Location = new System.Drawing.Point(1254, 267);
+            this.grayBlobMaxSlider.Minimum = 51;
+            this.grayBlobMaxSlider.Name = "grayBlobMaxSlider";
+            this.grayBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
+            this.grayBlobMaxSlider.TabIndex = 26;
+            this.grayBlobMaxSlider.Value = 51;
+            // 
+            // cannyMaxSlider
+            // 
+            this.cannyMaxSlider.Location = new System.Drawing.Point(658, 280);
+            this.cannyMaxSlider.Maximum = 200;
+            this.cannyMaxSlider.Minimum = 81;
+            this.cannyMaxSlider.Name = "cannyMaxSlider";
+            this.cannyMaxSlider.Size = new System.Drawing.Size(237, 17);
+            this.cannyMaxSlider.TabIndex = 27;
+            this.cannyMaxSlider.Value = 81;
+            // 
+            // cannyMinimumThreshold
+            // 
+            this.cannyMinimumThreshold.AutoSize = true;
+            this.cannyMinimumThreshold.Location = new System.Drawing.Point(584, 248);
+            this.cannyMinimumThreshold.Name = "cannyMinimumThreshold";
+            this.cannyMinimumThreshold.Size = new System.Drawing.Size(74, 13);
+            this.cannyMinimumThreshold.TabIndex = 28;
+            this.cannyMinimumThreshold.Text = "Min Threshold";
+            // 
+            // cannyMaxThreshold
+            // 
+            this.cannyMaxThreshold.AutoSize = true;
+            this.cannyMaxThreshold.Location = new System.Drawing.Point(581, 280);
+            this.cannyMaxThreshold.Name = "cannyMaxThreshold";
+            this.cannyMaxThreshold.Size = new System.Drawing.Size(77, 13);
+            this.cannyMaxThreshold.TabIndex = 29;
+            this.cannyMaxThreshold.Text = "Max Threshold";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(606, 736);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 13);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Theshold";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1217, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Blob Size:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(1217, 254);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Blob Size:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1217, 499);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Blob Size:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(1209, 724);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(24, 13);
+            this.label5.TabIndex = 34;
+            this.label5.Text = "Min";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1209, 480);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(24, 13);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Min";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1209, 236);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(24, 13);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Min";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1251, 724);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 13);
+            this.label8.TabIndex = 37;
+            this.label8.Text = "Max";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1251, 480);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 13);
+            this.label9.TabIndex = 38;
+            this.label9.Text = "Max";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1244, 239);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(27, 13);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "Max";
+            // 
+            // blobDetect
+            // 
+            this.blobDetect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.blobDetect.Location = new System.Drawing.Point(91, 714);
+            this.blobDetect.Name = "blobDetect";
+            this.blobDetect.Size = new System.Drawing.Size(135, 30);
+            this.blobDetect.TabIndex = 40;
+            this.blobDetect.Text = "Detect Blobs";
+            this.blobDetect.UseVisualStyleBackColor = true;
+            this.blobDetect.Click += new System.EventHandler(this.blobDetect_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(87, 436);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(158, 24);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "Captured Image";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(331, 499);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 16);
+            this.label12.TabIndex = 43;
+            this.label12.Text = "Red";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(331, 542);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 16);
+            this.label13.TabIndex = 44;
+            this.label13.Text = "Blue";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(329, 580);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(45, 16);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "Green";
+            // 
+            // capturedImagePanel
+            // 
+            this.capturedImagePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.capturedImagePanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.capturedImagePanel.Image = null;
+            this.capturedImagePanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.capturedImagePanel.Location = new System.Drawing.Point(22, 463);
+            this.capturedImagePanel.Name = "capturedImagePanel";
+            this.capturedImagePanel.ROTATION = 0F;
+            this.capturedImagePanel.Size = new System.Drawing.Size(275, 245);
+            this.capturedImagePanel.TabIndex = 46;
+            this.capturedImagePanel.Zoom = 1F;
+            // 
+            // grayScalePanel
+            // 
+            this.grayScalePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.grayScalePanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.grayScalePanel.Image = null;
+            this.grayScalePanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.grayScalePanel.Location = new System.Drawing.Point(332, 254);
+            this.grayScalePanel.Name = "grayScalePanel";
+            this.grayScalePanel.ROTATION = 0F;
+            this.grayScalePanel.Size = new System.Drawing.Size(243, 218);
+            this.grayScalePanel.TabIndex = 47;
+            this.grayScalePanel.Zoom = 1F;
+            // 
+            // BlobDetection
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1300, 762);
+            this.Controls.Add(this.grayScalePanel);
+            this.Controls.Add(this.capturedImagePanel);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.blobDetect);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cannyMaxThreshold);
+            this.Controls.Add(this.cannyMinimumThreshold);
+            this.Controls.Add(this.cannyMaxSlider);
+            this.Controls.Add(this.grayBlobMaxSlider);
+            this.Controls.Add(this.grayBlobMinSlider);
+            this.Controls.Add(this.cannyMinSlider);
+            this.Controls.Add(this.blackandwhiteSlider);
+            this.Controls.Add(this.cannyBlobMinSlider);
+            this.Controls.Add(this.cannyBlobMaxSlider);
+            this.Controls.Add(this.blackandwhiteBlobMaxSlider);
+            this.Controls.Add(this.blackandwhiteBlobMinSlider);
+            this.Controls.Add(this.blackandwhiteBlobDetectionLabel);
+            this.Controls.Add(this.cannyBlobDetection);
+            this.Controls.Add(this.cannyLabel);
+            this.Controls.Add(this.blackandwhiteLabel);
+            this.Controls.Add(this.greyScaleBlobLabel);
+            this.Controls.Add(this.greenSlider);
+            this.Controls.Add(this.blueSlider);
+            this.Controls.Add(this.redSlider);
+            this.Controls.Add(this.cannyBlobPanel);
+            this.Controls.Add(this.blackandwhiteBlobPanel);
+            this.Controls.Add(this.cannyPanel);
+            this.Controls.Add(this.blackandwhitePanel);
+            this.Controls.Add(this.grayBlobPicturePanel);
+            this.Controls.Add(this.grayScale);
+            this.Controls.Add(this.videoSourceList);
+            this.Controls.Add(this.RecordBtn);
+            this.Controls.Add(this.liveVideoSource);
+            this.Controls.Add(this.videoSourcePlayer1);
+            this.Name = "BlobDetection";
+            this.Text = "Blob Detection Application";
+            this.Load += new System.EventHandler(this.BlobDetection_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private AForge.Controls.VideoSourcePlayer videoSourcePlayer1;
+        private System.Windows.Forms.Label liveVideoSource;
+        private System.Windows.Forms.Button RecordBtn;
+        private System.Windows.Forms.ComboBox videoSourceList;
+        private System.Windows.Forms.Label grayScale;
+        private CustomTools.ScrollableImagePanel grayBlobPicturePanel;
+        private CustomTools.ScrollableImagePanel blackandwhitePanel;
+        private CustomTools.ScrollableImagePanel cannyPanel;
+        private CustomTools.ScrollableImagePanel blackandwhiteBlobPanel;
+        private CustomTools.ScrollableImagePanel cannyBlobPanel;
+        private System.Windows.Forms.HScrollBar redSlider;
+        private System.Windows.Forms.HScrollBar blueSlider;
+        private System.Windows.Forms.HScrollBar greenSlider;
+        private System.Windows.Forms.Label greyScaleBlobLabel;
+        private System.Windows.Forms.Label blackandwhiteLabel;
+        private System.Windows.Forms.Label cannyLabel;
+        private System.Windows.Forms.Label cannyBlobDetection;
+        private System.Windows.Forms.Label blackandwhiteBlobDetectionLabel;
+        private System.Windows.Forms.VScrollBar blackandwhiteBlobMinSlider;
+        private System.Windows.Forms.VScrollBar blackandwhiteBlobMaxSlider;
+        private System.Windows.Forms.VScrollBar cannyBlobMaxSlider;
+        private System.Windows.Forms.VScrollBar cannyBlobMinSlider;
+        private System.Windows.Forms.HScrollBar blackandwhiteSlider;
+        private System.Windows.Forms.HScrollBar cannyMinSlider;
+        private System.Windows.Forms.VScrollBar grayBlobMinSlider;
+        private System.Windows.Forms.VScrollBar grayBlobMaxSlider;
+        private System.Windows.Forms.HScrollBar cannyMaxSlider;
+        private System.Windows.Forms.Label cannyMinimumThreshold;
+        private System.Windows.Forms.Label cannyMaxThreshold;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button blobDetect;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private CustomTools.ScrollableImagePanel capturedImagePanel;
+        private CustomTools.ScrollableImagePanel grayScalePanel;
     }
 }
 
