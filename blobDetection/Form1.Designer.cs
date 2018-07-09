@@ -34,10 +34,10 @@
             this.RecordBtn = new System.Windows.Forms.Button();
             this.videoSourceList = new System.Windows.Forms.ComboBox();
             this.grayScale = new System.Windows.Forms.Label();
-            this.grayBlobPicturePanel = new CustomTools.ScrollableImagePanel();
+            this.crossHareCheckBox = new CustomTools.ScrollableImagePanel();
             this.blackandwhitePanel = new CustomTools.ScrollableImagePanel();
             this.cannyPanel = new CustomTools.ScrollableImagePanel();
-            this.blackandwhiteBlobPanel = new CustomTools.ScrollableImagePanel();
+            this.horionzontalHistogramCheckboxBW = new CustomTools.ScrollableImagePanel();
             this.cannyBlobPanel = new CustomTools.ScrollableImagePanel();
             this.redSlider = new System.Windows.Forms.HScrollBar();
             this.blueSlider = new System.Windows.Forms.HScrollBar();
@@ -97,6 +97,14 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.crossHareCanny = new System.Windows.Forms.CheckBox();
+            this.verticalHistogramCheckboxCanny = new System.Windows.Forms.CheckBox();
+            this.horizontalHistogramCheckboxCanny = new System.Windows.Forms.CheckBox();
+            this.crosshairCheckboxBW = new System.Windows.Forms.CheckBox();
+            this.verticalHistogramCheckboxBW = new System.Windows.Forms.CheckBox();
+            this.horizontalHistogramCheckboxBW = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cannyVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteHorizontalRowGapNUD)).BeginInit();
@@ -153,18 +161,18 @@
             this.grayScale.TabIndex = 5;
             this.grayScale.Text = "Gray Scale Image";
             // 
-            // grayBlobPicturePanel
+            // crossHareCheckBox
             // 
-            this.grayBlobPicturePanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.grayBlobPicturePanel.CanvasSize = new System.Drawing.Size(60, 40);
-            this.grayBlobPicturePanel.Image = null;
-            this.grayBlobPicturePanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.grayBlobPicturePanel.Location = new System.Drawing.Point(965, 301);
-            this.grayBlobPicturePanel.Name = "grayBlobPicturePanel";
-            this.grayBlobPicturePanel.ROTATION = 0F;
-            this.grayBlobPicturePanel.Size = new System.Drawing.Size(322, 250);
-            this.grayBlobPicturePanel.TabIndex = 6;
-            this.grayBlobPicturePanel.Zoom = 1F;
+            this.crossHareCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.crossHareCheckBox.CanvasSize = new System.Drawing.Size(60, 40);
+            this.crossHareCheckBox.Image = null;
+            this.crossHareCheckBox.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.crossHareCheckBox.Location = new System.Drawing.Point(1131, 296);
+            this.crossHareCheckBox.Name = "crossHareCheckBox";
+            this.crossHareCheckBox.ROTATION = 0F;
+            this.crossHareCheckBox.Size = new System.Drawing.Size(322, 250);
+            this.crossHareCheckBox.TabIndex = 6;
+            this.crossHareCheckBox.Zoom = 1F;
             // 
             // blackandwhitePanel
             // 
@@ -192,19 +200,19 @@
             this.cannyPanel.TabIndex = 8;
             this.cannyPanel.Zoom = 1F;
             // 
-            // blackandwhiteBlobPanel
+            // horionzontalHistogramCheckboxBW
             // 
-            this.blackandwhiteBlobPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.blackandwhiteBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
-            this.blackandwhiteBlobPanel.Image = null;
-            this.blackandwhiteBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.blackandwhiteBlobPanel.Location = new System.Drawing.Point(956, 577);
-            this.blackandwhiteBlobPanel.Name = "blackandwhiteBlobPanel";
-            this.blackandwhiteBlobPanel.ROTATION = 0F;
-            this.blackandwhiteBlobPanel.Size = new System.Drawing.Size(331, 257);
-            this.blackandwhiteBlobPanel.TabIndex = 9;
-            this.blackandwhiteBlobPanel.Zoom = 1F;
-            this.blackandwhiteBlobPanel.Load += new System.EventHandler(this.scrollableImagePanel4_Load);
+            this.horionzontalHistogramCheckboxBW.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.horionzontalHistogramCheckboxBW.CanvasSize = new System.Drawing.Size(60, 40);
+            this.horionzontalHistogramCheckboxBW.Image = null;
+            this.horionzontalHistogramCheckboxBW.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.horionzontalHistogramCheckboxBW.Location = new System.Drawing.Point(1131, 572);
+            this.horionzontalHistogramCheckboxBW.Name = "horionzontalHistogramCheckboxBW";
+            this.horionzontalHistogramCheckboxBW.ROTATION = 0F;
+            this.horionzontalHistogramCheckboxBW.Size = new System.Drawing.Size(322, 257);
+            this.horionzontalHistogramCheckboxBW.TabIndex = 9;
+            this.horionzontalHistogramCheckboxBW.Zoom = 1F;
+            this.horionzontalHistogramCheckboxBW.Load += new System.EventHandler(this.scrollableImagePanel4_Load);
             // 
             // cannyBlobPanel
             // 
@@ -212,7 +220,7 @@
             this.cannyBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
             this.cannyBlobPanel.Image = null;
             this.cannyBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.cannyBlobPanel.Location = new System.Drawing.Point(965, 31);
+            this.cannyBlobPanel.Location = new System.Drawing.Point(1131, 26);
             this.cannyBlobPanel.Name = "cannyBlobPanel";
             this.cannyBlobPanel.ROTATION = 0F;
             this.cannyBlobPanel.Size = new System.Drawing.Size(322, 248);
@@ -250,7 +258,7 @@
             // 
             this.greyScaleBlobLabel.AutoSize = true;
             this.greyScaleBlobLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.greyScaleBlobLabel.Location = new System.Drawing.Point(1042, 282);
+            this.greyScaleBlobLabel.Location = new System.Drawing.Point(1208, 277);
             this.greyScaleBlobLabel.Name = "greyScaleBlobLabel";
             this.greyScaleBlobLabel.Size = new System.Drawing.Size(166, 16);
             this.greyScaleBlobLabel.TabIndex = 14;
@@ -280,7 +288,7 @@
             // 
             this.cannyBlobDetection.AutoSize = true;
             this.cannyBlobDetection.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cannyBlobDetection.Location = new System.Drawing.Point(1052, 12);
+            this.cannyBlobDetection.Location = new System.Drawing.Point(1218, 7);
             this.cannyBlobDetection.Name = "cannyBlobDetection";
             this.cannyBlobDetection.Size = new System.Drawing.Size(137, 16);
             this.cannyBlobDetection.TabIndex = 17;
@@ -290,7 +298,7 @@
             // 
             this.blackandwhiteBlobDetectionLabel.AutoSize = true;
             this.blackandwhiteBlobDetectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blackandwhiteBlobDetectionLabel.Location = new System.Drawing.Point(1012, 554);
+            this.blackandwhiteBlobDetectionLabel.Location = new System.Drawing.Point(1178, 549);
             this.blackandwhiteBlobDetectionLabel.Name = "blackandwhiteBlobDetectionLabel";
             this.blackandwhiteBlobDetectionLabel.Size = new System.Drawing.Size(196, 16);
             this.blackandwhiteBlobDetectionLabel.TabIndex = 18;
@@ -298,7 +306,7 @@
             // 
             // blackandwhiteBlobMinSlider
             // 
-            this.blackandwhiteBlobMinSlider.Location = new System.Drawing.Point(1303, 605);
+            this.blackandwhiteBlobMinSlider.Location = new System.Drawing.Point(1469, 600);
             this.blackandwhiteBlobMinSlider.Maximum = 50;
             this.blackandwhiteBlobMinSlider.Name = "blackandwhiteBlobMinSlider";
             this.blackandwhiteBlobMinSlider.Size = new System.Drawing.Size(17, 205);
@@ -308,7 +316,7 @@
             // 
             // blackandwhiteBlobMaxSlider
             // 
-            this.blackandwhiteBlobMaxSlider.Location = new System.Drawing.Point(1341, 605);
+            this.blackandwhiteBlobMaxSlider.Location = new System.Drawing.Point(1507, 600);
             this.blackandwhiteBlobMaxSlider.Minimum = 51;
             this.blackandwhiteBlobMaxSlider.Name = "blackandwhiteBlobMaxSlider";
             this.blackandwhiteBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
@@ -318,7 +326,7 @@
             // 
             // cannyBlobMaxSlider
             // 
-            this.cannyBlobMaxSlider.Location = new System.Drawing.Point(1341, 60);
+            this.cannyBlobMaxSlider.Location = new System.Drawing.Point(1507, 55);
             this.cannyBlobMaxSlider.Minimum = 51;
             this.cannyBlobMaxSlider.Name = "cannyBlobMaxSlider";
             this.cannyBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
@@ -328,7 +336,7 @@
             // 
             // cannyBlobMinSlider
             // 
-            this.cannyBlobMinSlider.Location = new System.Drawing.Point(1303, 60);
+            this.cannyBlobMinSlider.Location = new System.Drawing.Point(1469, 55);
             this.cannyBlobMinSlider.Maximum = 50;
             this.cannyBlobMinSlider.Name = "cannyBlobMinSlider";
             this.cannyBlobMinSlider.Size = new System.Drawing.Size(17, 205);
@@ -360,7 +368,7 @@
             // 
             // grayBlobMinSlider
             // 
-            this.grayBlobMinSlider.Location = new System.Drawing.Point(1295, 322);
+            this.grayBlobMinSlider.Location = new System.Drawing.Point(1461, 317);
             this.grayBlobMinSlider.Maximum = 50;
             this.grayBlobMinSlider.Name = "grayBlobMinSlider";
             this.grayBlobMinSlider.Size = new System.Drawing.Size(17, 205);
@@ -370,7 +378,7 @@
             // 
             // grayBlobMaxSlider
             // 
-            this.grayBlobMaxSlider.Location = new System.Drawing.Point(1333, 322);
+            this.grayBlobMaxSlider.Location = new System.Drawing.Point(1499, 317);
             this.grayBlobMaxSlider.Minimum = 51;
             this.grayBlobMaxSlider.Name = "grayBlobMaxSlider";
             this.grayBlobMaxSlider.Size = new System.Drawing.Size(17, 205);
@@ -419,7 +427,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1304, 40);
+            this.label2.Location = new System.Drawing.Point(1470, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
             this.label2.TabIndex = 31;
@@ -428,7 +436,7 @@
             // gamaSlider
             // 
             this.gamaSlider.AutoSize = true;
-            this.gamaSlider.Location = new System.Drawing.Point(1296, 309);
+            this.gamaSlider.Location = new System.Drawing.Point(1462, 304);
             this.gamaSlider.Name = "gamaSlider";
             this.gamaSlider.Size = new System.Drawing.Size(54, 13);
             this.gamaSlider.TabIndex = 32;
@@ -437,7 +445,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1304, 585);
+            this.label4.Location = new System.Drawing.Point(1470, 580);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 33;
@@ -446,7 +454,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1304, 820);
+            this.label5.Location = new System.Drawing.Point(1466, 820);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(24, 13);
             this.label5.TabIndex = 34;
@@ -455,7 +463,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1288, 535);
+            this.label6.Location = new System.Drawing.Point(1454, 530);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(24, 13);
             this.label6.TabIndex = 35;
@@ -464,7 +472,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1300, 271);
+            this.label7.Location = new System.Drawing.Point(1466, 266);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(24, 13);
             this.label7.TabIndex = 36;
@@ -473,7 +481,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1346, 820);
+            this.label8.Location = new System.Drawing.Point(1504, 823);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(27, 13);
             this.label8.TabIndex = 37;
@@ -482,7 +490,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1330, 535);
+            this.label9.Location = new System.Drawing.Point(1496, 530);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(27, 13);
             this.label9.TabIndex = 38;
@@ -491,7 +499,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1330, 271);
+            this.label10.Location = new System.Drawing.Point(1496, 266);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(27, 13);
             this.label10.TabIndex = 39;
@@ -615,7 +623,7 @@
             // 
             // cannyHistogramBtn
             // 
-            this.cannyHistogramBtn.Location = new System.Drawing.Point(701, 373);
+            this.cannyHistogramBtn.Location = new System.Drawing.Point(967, 25);
             this.cannyHistogramBtn.Name = "cannyHistogramBtn";
             this.cannyHistogramBtn.Size = new System.Drawing.Size(121, 23);
             this.cannyHistogramBtn.TabIndex = 52;
@@ -625,7 +633,7 @@
             // 
             // blackandwhiteHistorgrambtn
             // 
-            this.blackandwhiteHistorgrambtn.Location = new System.Drawing.Point(687, 782);
+            this.blackandwhiteHistorgrambtn.Location = new System.Drawing.Point(967, 486);
             this.blackandwhiteHistorgrambtn.Name = "blackandwhiteHistorgrambtn";
             this.blackandwhiteHistorgrambtn.Size = new System.Drawing.Size(121, 23);
             this.blackandwhiteHistorgrambtn.TabIndex = 53;
@@ -646,9 +654,9 @@
             // 
             // horizontalColorBtn
             // 
-            this.horizontalColorBtn.Location = new System.Drawing.Point(587, 365);
+            this.horizontalColorBtn.Location = new System.Drawing.Point(937, 93);
             this.horizontalColorBtn.Name = "horizontalColorBtn";
-            this.horizontalColorBtn.Size = new System.Drawing.Size(98, 39);
+            this.horizontalColorBtn.Size = new System.Drawing.Size(87, 51);
             this.horizontalColorBtn.TabIndex = 60;
             this.horizontalColorBtn.Text = "Horizontal Histogram Color";
             this.horizontalColorBtn.UseVisualStyleBackColor = true;
@@ -656,9 +664,9 @@
             // 
             // verticalColorBtn
             // 
-            this.verticalColorBtn.Location = new System.Drawing.Point(842, 365);
+            this.verticalColorBtn.Location = new System.Drawing.Point(1037, 93);
             this.verticalColorBtn.Name = "verticalColorBtn";
-            this.verticalColorBtn.Size = new System.Drawing.Size(94, 39);
+            this.verticalColorBtn.Size = new System.Drawing.Size(88, 51);
             this.verticalColorBtn.TabIndex = 61;
             this.verticalColorBtn.Text = "Vertical Histogram Color";
             this.verticalColorBtn.UseVisualStyleBackColor = true;
@@ -706,7 +714,7 @@
             // 
             // cannyVerticalNumRowNUD
             // 
-            this.cannyVerticalNumRowNUD.Location = new System.Drawing.Point(587, 423);
+            this.cannyVerticalNumRowNUD.Location = new System.Drawing.Point(937, 67);
             this.cannyVerticalNumRowNUD.Maximum = new decimal(new int[] {
             45,
             0,
@@ -718,7 +726,7 @@
             0,
             0});
             this.cannyVerticalNumRowNUD.Name = "cannyVerticalNumRowNUD";
-            this.cannyVerticalNumRowNUD.Size = new System.Drawing.Size(120, 20);
+            this.cannyVerticalNumRowNUD.Size = new System.Drawing.Size(87, 20);
             this.cannyVerticalNumRowNUD.TabIndex = 66;
             this.cannyVerticalNumRowNUD.Value = new decimal(new int[] {
             5,
@@ -728,7 +736,7 @@
             // 
             // blackandwhiteVerticalNumRowNUD
             // 
-            this.blackandwhiteVerticalNumRowNUD.Location = new System.Drawing.Point(587, 811);
+            this.blackandwhiteVerticalNumRowNUD.Location = new System.Drawing.Point(931, 529);
             this.blackandwhiteVerticalNumRowNUD.Maximum = new decimal(new int[] {
             45,
             0,
@@ -740,7 +748,7 @@
             0,
             0});
             this.blackandwhiteVerticalNumRowNUD.Name = "blackandwhiteVerticalNumRowNUD";
-            this.blackandwhiteVerticalNumRowNUD.Size = new System.Drawing.Size(120, 20);
+            this.blackandwhiteVerticalNumRowNUD.Size = new System.Drawing.Size(87, 20);
             this.blackandwhiteVerticalNumRowNUD.TabIndex = 67;
             this.blackandwhiteVerticalNumRowNUD.Value = new decimal(new int[] {
             5,
@@ -750,7 +758,7 @@
             // 
             // blackandwhiteHorizontalRowGapNUD
             // 
-            this.blackandwhiteHorizontalRowGapNUD.Location = new System.Drawing.Point(806, 811);
+            this.blackandwhiteHorizontalRowGapNUD.Location = new System.Drawing.Point(1030, 530);
             this.blackandwhiteHorizontalRowGapNUD.Maximum = new decimal(new int[] {
             45,
             0,
@@ -762,7 +770,7 @@
             0,
             0});
             this.blackandwhiteHorizontalRowGapNUD.Name = "blackandwhiteHorizontalRowGapNUD";
-            this.blackandwhiteHorizontalRowGapNUD.Size = new System.Drawing.Size(120, 20);
+            this.blackandwhiteHorizontalRowGapNUD.Size = new System.Drawing.Size(95, 20);
             this.blackandwhiteHorizontalRowGapNUD.TabIndex = 68;
             this.blackandwhiteHorizontalRowGapNUD.Value = new decimal(new int[] {
             5,
@@ -773,7 +781,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(601, 795);
+            this.label3.Location = new System.Drawing.Point(929, 513);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 13);
             this.label3.TabIndex = 69;
@@ -782,7 +790,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(607, 407);
+            this.label16.Location = new System.Drawing.Point(934, 51);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(90, 13);
             this.label16.TabIndex = 70;
@@ -791,7 +799,7 @@
             // 
             // cannyHoriztonalNumRowNUD
             // 
-            this.cannyHoriztonalNumRowNUD.Location = new System.Drawing.Point(815, 423);
+            this.cannyHoriztonalNumRowNUD.Location = new System.Drawing.Point(1037, 67);
             this.cannyHoriztonalNumRowNUD.Maximum = new decimal(new int[] {
             45,
             0,
@@ -803,7 +811,7 @@
             0,
             0});
             this.cannyHoriztonalNumRowNUD.Name = "cannyHoriztonalNumRowNUD";
-            this.cannyHoriztonalNumRowNUD.Size = new System.Drawing.Size(120, 20);
+            this.cannyHoriztonalNumRowNUD.Size = new System.Drawing.Size(88, 20);
             this.cannyHoriztonalNumRowNUD.TabIndex = 71;
             this.cannyHoriztonalNumRowNUD.Value = new decimal(new int[] {
             5,
@@ -815,7 +823,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(815, 795);
+            this.label17.Location = new System.Drawing.Point(1025, 513);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(102, 13);
             this.label17.TabIndex = 72;
@@ -824,7 +832,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(824, 407);
+            this.label18.Location = new System.Drawing.Point(1027, 51);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(102, 13);
             this.label18.TabIndex = 73;
@@ -835,11 +843,97 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // crossHareCanny
+            // 
+            this.crossHareCanny.AutoSize = true;
+            this.crossHareCanny.Location = new System.Drawing.Point(939, 151);
+            this.crossHareCanny.Name = "crossHareCanny";
+            this.crossHareCanny.Size = new System.Drawing.Size(69, 17);
+            this.crossHareCanny.TabIndex = 74;
+            this.crossHareCanny.Text = "Crosshair";
+            this.crossHareCanny.UseVisualStyleBackColor = true;
+            // 
+            // verticalHistogramCheckboxCanny
+            // 
+            this.verticalHistogramCheckboxCanny.AutoSize = true;
+            this.verticalHistogramCheckboxCanny.Location = new System.Drawing.Point(938, 174);
+            this.verticalHistogramCheckboxCanny.Name = "verticalHistogramCheckboxCanny";
+            this.verticalHistogramCheckboxCanny.Size = new System.Drawing.Size(111, 17);
+            this.verticalHistogramCheckboxCanny.TabIndex = 75;
+            this.verticalHistogramCheckboxCanny.Text = "Vertical Histogram";
+            this.verticalHistogramCheckboxCanny.UseVisualStyleBackColor = true;
+            // 
+            // horizontalHistogramCheckboxCanny
+            // 
+            this.horizontalHistogramCheckboxCanny.AutoSize = true;
+            this.horizontalHistogramCheckboxCanny.Location = new System.Drawing.Point(937, 197);
+            this.horizontalHistogramCheckboxCanny.Name = "horizontalHistogramCheckboxCanny";
+            this.horizontalHistogramCheckboxCanny.Size = new System.Drawing.Size(123, 17);
+            this.horizontalHistogramCheckboxCanny.TabIndex = 76;
+            this.horizontalHistogramCheckboxCanny.Text = "Horizontal Histogram";
+            this.horizontalHistogramCheckboxCanny.UseVisualStyleBackColor = true;
+            // 
+            // crosshairCheckboxBW
+            // 
+            this.crosshairCheckboxBW.AutoSize = true;
+            this.crosshairCheckboxBW.Location = new System.Drawing.Point(941, 625);
+            this.crosshairCheckboxBW.Name = "crosshairCheckboxBW";
+            this.crosshairCheckboxBW.Size = new System.Drawing.Size(69, 17);
+            this.crosshairCheckboxBW.TabIndex = 77;
+            this.crosshairCheckboxBW.Text = "Crosshair";
+            this.crosshairCheckboxBW.UseVisualStyleBackColor = true;
+            // 
+            // verticalHistogramCheckboxBW
+            // 
+            this.verticalHistogramCheckboxBW.AutoSize = true;
+            this.verticalHistogramCheckboxBW.Location = new System.Drawing.Point(941, 648);
+            this.verticalHistogramCheckboxBW.Name = "verticalHistogramCheckboxBW";
+            this.verticalHistogramCheckboxBW.Size = new System.Drawing.Size(111, 17);
+            this.verticalHistogramCheckboxBW.TabIndex = 78;
+            this.verticalHistogramCheckboxBW.Text = "Vertical Histogram";
+            this.verticalHistogramCheckboxBW.UseVisualStyleBackColor = true;
+            // 
+            // horizontalHistogramCheckboxBW
+            // 
+            this.horizontalHistogramCheckboxBW.AutoSize = true;
+            this.horizontalHistogramCheckboxBW.Location = new System.Drawing.Point(941, 671);
+            this.horizontalHistogramCheckboxBW.Name = "horizontalHistogramCheckboxBW";
+            this.horizontalHistogramCheckboxBW.Size = new System.Drawing.Size(129, 17);
+            this.horizontalHistogramCheckboxBW.TabIndex = 79;
+            this.horizontalHistogramCheckboxBW.Text = "Horizonatal Histogram";
+            this.horizontalHistogramCheckboxBW.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(932, 555);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 51);
+            this.button1.TabIndex = 80;
+            this.button1.Text = "Horizontal Histogram Color";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1028, 556);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(88, 51);
+            this.button2.TabIndex = 81;
+            this.button2.Text = "Vertical Histogram Color";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // blackandwhiteRowGapNUD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1532, 846);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.horizontalHistogramCheckboxBW);
+            this.Controls.Add(this.verticalHistogramCheckboxBW);
+            this.Controls.Add(this.crosshairCheckboxBW);
+            this.Controls.Add(this.horizontalHistogramCheckboxCanny);
+            this.Controls.Add(this.verticalHistogramCheckboxCanny);
+            this.Controls.Add(this.crossHareCanny);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.cannyHoriztonalNumRowNUD);
@@ -898,10 +992,10 @@
             this.Controls.Add(this.blueSlider);
             this.Controls.Add(this.redSlider);
             this.Controls.Add(this.cannyBlobPanel);
-            this.Controls.Add(this.blackandwhiteBlobPanel);
+            this.Controls.Add(this.horionzontalHistogramCheckboxBW);
             this.Controls.Add(this.cannyPanel);
             this.Controls.Add(this.blackandwhitePanel);
-            this.Controls.Add(this.grayBlobPicturePanel);
+            this.Controls.Add(this.crossHareCheckBox);
             this.Controls.Add(this.grayScale);
             this.Controls.Add(this.videoSourceList);
             this.Controls.Add(this.RecordBtn);
@@ -926,10 +1020,10 @@
         private System.Windows.Forms.Button RecordBtn;
         private System.Windows.Forms.ComboBox videoSourceList;
         private System.Windows.Forms.Label grayScale;
-        private CustomTools.ScrollableImagePanel grayBlobPicturePanel;
+        private CustomTools.ScrollableImagePanel crossHareCheckBox;
         private CustomTools.ScrollableImagePanel blackandwhitePanel;
         private CustomTools.ScrollableImagePanel cannyPanel;
-        private CustomTools.ScrollableImagePanel blackandwhiteBlobPanel;
+        private CustomTools.ScrollableImagePanel horionzontalHistogramCheckboxBW;
         private CustomTools.ScrollableImagePanel cannyBlobPanel;
         private System.Windows.Forms.HScrollBar redSlider;
         private System.Windows.Forms.HScrollBar blueSlider;
@@ -989,6 +1083,14 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox crossHareCanny;
+        private System.Windows.Forms.CheckBox verticalHistogramCheckboxCanny;
+        private System.Windows.Forms.CheckBox horizontalHistogramCheckboxCanny;
+        private System.Windows.Forms.CheckBox crosshairCheckboxBW;
+        private System.Windows.Forms.CheckBox verticalHistogramCheckboxBW;
+        private System.Windows.Forms.CheckBox horizontalHistogramCheckboxBW;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

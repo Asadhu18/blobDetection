@@ -208,7 +208,7 @@ namespace blobDetection
             Graphics g = Graphics.FromImage(tempBitmap);
             g.DrawImage(inImage, 0, 0);
 
-            Pen redPen = new Pen(Color.Yellow, .5F);
+            Pen redPen = new Pen(Color.Yellow, 5F);
             Pen fuschiaPen = new Pen(Brushes.Fuchsia, 5.0F);
             Pen bluePen = new Pen(Color.FromArgb(60, 0, 0, 255), .5F);
             Pen verticalHistogramPen = new Pen(horizontalColor,5f);
@@ -261,7 +261,7 @@ namespace blobDetection
                 sumArrayHorizontal[xOffset] += imageByteArray[vPointer10 + xOffset];
             }
 
-            int hPointer1 = horizontalLineStart * height;
+            int hPointer1 = horizontalLineStart*height;
             int hPointer2 = hPointer1 + (height * horizontalSumSpace);
             int hPointer3 = hPointer2 + (height * horizontalSumSpace);
             int hPointer4 = hPointer3 + (height * horizontalSumSpace);
@@ -272,19 +272,19 @@ namespace blobDetection
             int hPointer9 = hPointer8 + (height * horizontalSumSpace);
             int hPointer10 = hPointer9 + (height * horizontalSumSpace);
 
-            for (int yOffset = 0; yOffset < height; yOffset++)
-            {//Summing Horizontal Pixel Data
-                sumArrayVertical[yOffset] += imageByteArray[hPointer1 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer2 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer3 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer4 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer5 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer6 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer7 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer8 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer9 + yOffset];
-                sumArrayVertical[yOffset] += imageByteArray[hPointer10 + yOffset];
-            }
+            //for (int yOffset = 0; yOffset < height; yOffset++)
+            //{//Summing Horizontal Pixel Data
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer1 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer2 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer3 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer4 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer5 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer6 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer7 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer8 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer9 + yOffset];
+            //    sumArrayVertical[yOffset] += imageByteArray[hPointer10 + yOffset];
+            //}
 
             //horiztonal sum array
             //Sums row data
@@ -297,6 +297,22 @@ namespace blobDetection
             //        sumArrayVertical[rowOffset] += imageByteArray[yOffset + (width * (rowOffset))];
             //    }
             //}
+            //for (int rowOffset = 0; rowOffset < height; rowOffset++)
+            //{
+            //    for (int yOffset = 0; yOffset < horizontalSum; yOffset++)
+            //    {//Summing Vertical Pixel Data
+            //        sumArrayVertical[rowOffset] += imageByteArray[yOffset + (width * (rowOffset))];
+            //    }
+            //}
+            for (int k = 0; k < height; k++)
+            {
+                for (int h = 0; h < horizontalSumSpace; h++)
+                {
+
+                    sumArrayVertical[k] = imageByteArray[(horizontalLineStart + h) + (stride * k)];
+                    
+                }
+            }
 
 
             for (int count = 0; count < width; count++)
@@ -345,6 +361,7 @@ namespace blobDetection
 
             for (int b = 0; b < height; b++)
             {
+                if(horizontalHistogramCheckboxCanny.Checked||horizontalHistogramCheckboxBW.Checked)
                 histogramVerticalData[b] = sumArrayVertical[b] / divisorV;
                 //Console.WriteLine(sumArrayVertical[b] + "|||");
             }
@@ -352,7 +369,7 @@ namespace blobDetection
             for (int z = 0; z < width-1; z++)
             {
                 //horizontalPoints[z] = new System.Drawing.Point(z,(int)sumArrayHorizontal[z]);
-                
+                if(verticalHistogramCheckboxBW.Checked||verticalHistogramCheckboxCanny.Checked)
                 g.DrawLine(horizontalHistogramPen, z, height-histogramHorizontalData[z], z, height-histogramHorizontalData[z+1]);
             }
 
@@ -360,17 +377,20 @@ namespace blobDetection
             {
 
                 //g.DrawLine(horizontalHistogramPen, width, a, histogramVerticalData[a], a);
-                //g.DrawLine(verticalHistogramPen, width - histogramVerticalData[a],a, width - histogramVerticalData[a + 1],a);
+                g.DrawLine(verticalHistogramPen, width - histogramVerticalData[a],a, width - histogramVerticalData[a + 1],a);
             }
             g.DrawLines(horizontalHistogramPen,  horizontalPoints);
 
 
             g.DrawLine(fuschiaPen, 0,(int) (vPointer1/stride), width,(int) (vPointer1/stride));
             g.DrawLine(fuschiaPen, 0, (int)(vPointer10 / stride), width, (int)(vPointer10 / stride));
-            g.DrawLine(fuschiaPen, (int)(hPointer1 / height), 0, (int)(hPointer1 / height), height);
-            g.DrawLine(fuschiaPen,(int)(hPointer10 / height),0, (int)(hPointer10 / height),height);
+            g.DrawLine(fuschiaPen, (int)(horizontalLineStart), 0, (int)(horizontalLineStart), height);
+            g.DrawLine(fuschiaPen,(int)(horizontalLineStart+(horizontalSumSpace)),0, (int)(horizontalLineStart + (horizontalSumSpace)),height);
             //g.DrawLine(fuschiaPen, minValHindex, 0, minValHindex, height);
             //g.DrawLine(fuschiaPen, 0, minValVindex, width, minValVindex);
+            Size roiSize = new Size(100, 100);
+            //Rectangle regionOfIntrest = motionTracker(histogramHorizontalData, histogramVerticalData);
+            //g.DrawRectangle(redPen,regionOfIntrest);
             return (Bitmap) tempBitmap;
             
         }
@@ -380,9 +400,9 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void blobDetect_Click(object sender, EventArgs e)
@@ -407,8 +427,8 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void blueSlider_Scroll(object sender, ScrollEventArgs e)
@@ -416,19 +436,19 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void greenSlider_Scroll(object sender, ScrollEventArgs e)
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            Bitmap cannyImage = cannyImageConvert(grayImage); grayBlobPicturePanel.Image = blobDetection(grayImage, grayBlobMinSlider.Value, grayBlobMaxSlider.Value);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            Bitmap cannyImage = cannyImageConvert(grayImage); crossHareCheckBox.Image = blobDetection(grayImage, grayBlobMinSlider.Value, grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void cannyMinSlider_Scroll(object sender, ScrollEventArgs e)
@@ -449,7 +469,7 @@ namespace blobDetection
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void cannyBlobMinSlider_Scroll(object sender, ScrollEventArgs e)
@@ -469,27 +489,27 @@ namespace blobDetection
         private void grayBlobMinSlider_Scroll(object sender, ScrollEventArgs e)
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
         }
 
         private void grayBlobMaxSlider_Scroll(object sender, ScrollEventArgs e)
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
         }
 
         private void blackandwhiteBlobMinSlider_Scroll(object sender, ScrollEventArgs e)
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void blackandwhiteBlobMaxSlider_Scroll(object sender, ScrollEventArgs e)
         {
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void gamaSlider1_Scroll(object sender, ScrollEventArgs e)
@@ -497,9 +517,9 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void contrastSlider_Scroll(object sender, ScrollEventArgs e)
@@ -507,9 +527,9 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -520,9 +540,9 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(orignalImage);
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
-            grayBlobPicturePanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
+            crossHareCheckBox.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
-            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
+            horionzontalHistogramCheckboxBW.Image = blobDetection(blackandwhiteImage, (blackandwhiteBlobMinSlider.Maximum - blackandwhiteBlobMinSlider.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void blackandwhiteHistorgrambtn_Click(object sender, EventArgs e)
@@ -610,7 +630,7 @@ namespace blobDetection
             Bitmap grayImage = grayscaleImageConvert(captureImage());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             blackandwhiteVerticalHistogramSlider.Maximum = 480 - ((int)blackandwhiteVerticalNumRowNUD.Value * 10);
-            blackandwhiteHorizontalHistogramSlider.Maximum = 640 - ((int)blackandwhiteHorizontalRowGapNUD.Value * 10);
+            blackandwhiteHorizontalHistogramSlider.Maximum = 630 - ((int)blackandwhiteHorizontalRowGapNUD.Value * 10);
             blackandwhitePanel.Image = extractHistogramData(blackandwhiteImage, (int)blackandwhiteVerticalHistogramSlider.Value, (int)blackandwhiteVerticalNumRowNUD.Value, blackandwhiteHorizontalHistogramSlider.Value, (int)blackandwhiteHorizontalRowGapNUD.Value);
         }
 
@@ -634,6 +654,48 @@ namespace blobDetection
             {
                 createCannyHistogram();
             }
+        }
+        public Rectangle motionTracker(float[] horizontalArray, float[] verticalArray) {
+
+     
+            float firstXpeak = 0.0f;
+            float secondXpeak = 0.0f;
+            float firstYpeak = 0.0f;
+            float secondYpeak = 0.0f;
+            for (int i = 0; i < horizontalArray.Length; i++)
+            {
+                if (horizontalArray[i] != 480)
+                {
+                    firstXpeak = i;
+                }
+            }
+            for (int j = 0; j < verticalArray.Length; j++)
+            {
+                if (verticalArray[j] != 640)
+                {
+                    firstYpeak = j;
+                }
+            }
+            for (int k = verticalArray.Length; k <= 0; k--)
+            {
+                if (verticalArray[k] != 640)
+                {
+                    secondYpeak = k;
+                }
+            }
+            for (int l = horizontalArray.Length; l <= 0; l--)
+            {
+                if (horizontalArray[l] !=480)
+                {
+                    secondXpeak = l;
+                }
+            }
+            System.Drawing.Point originPoint = new System.Drawing.Point((int)secondXpeak, (int)secondYpeak);
+
+            Size roiSize = new Size((int)(firstXpeak), (int)(firstYpeak));
+            Rectangle intersectionRectangle = new Rectangle(originPoint, roiSize);
+            return intersectionRectangle;
+
         }
     }
 }
