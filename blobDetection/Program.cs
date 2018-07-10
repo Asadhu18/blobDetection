@@ -15,7 +15,7 @@ namespace blobDetection
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new blackandwhiteRowGapNUD());
+            Application.Run(new cannyMinBlobSize());
         }
     }
 }

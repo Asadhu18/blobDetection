@@ -1,6 +1,6 @@
 ﻿namespace blobDetection
 {
-    partial class blackandwhiteRowGapNUD
+    partial class cannyMinBlobSize
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,7 @@
             this.crossHareCheckBox = new CustomTools.ScrollableImagePanel();
             this.blackandwhitePanel = new CustomTools.ScrollableImagePanel();
             this.cannyPanel = new CustomTools.ScrollableImagePanel();
-            this.horionzontalHistogramCheckboxBW = new CustomTools.ScrollableImagePanel();
+            this.blackandwhiteBlobPanel = new CustomTools.ScrollableImagePanel();
             this.cannyBlobPanel = new CustomTools.ScrollableImagePanel();
             this.redSlider = new System.Windows.Forms.HScrollBar();
             this.blueSlider = new System.Windows.Forms.HScrollBar();
@@ -47,7 +47,7 @@
             this.cannyLabel = new System.Windows.Forms.Label();
             this.cannyBlobDetection = new System.Windows.Forms.Label();
             this.blackandwhiteBlobDetectionLabel = new System.Windows.Forms.Label();
-            this.blackandwhiteBlobMinSlider = new System.Windows.Forms.VScrollBar();
+            this.blobDetectionForm = new System.Windows.Forms.VScrollBar();
             this.blackandwhiteBlobMaxSlider = new System.Windows.Forms.VScrollBar();
             this.cannyBlobMaxSlider = new System.Windows.Forms.VScrollBar();
             this.cannyBlobMinSlider = new System.Windows.Forms.VScrollBar();
@@ -97,7 +97,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.crossHareCanny = new System.Windows.Forms.CheckBox();
+            this.crossHairCanny = new System.Windows.Forms.CheckBox();
             this.verticalHistogramCheckboxCanny = new System.Windows.Forms.CheckBox();
             this.horizontalHistogramCheckboxCanny = new System.Windows.Forms.CheckBox();
             this.crosshairCheckboxBW = new System.Windows.Forms.CheckBox();
@@ -105,10 +105,24 @@
             this.horizontalHistogramCheckboxBW = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.cannyBoundryRangeCheckbox = new System.Windows.Forms.CheckBox();
+            this.bwBoundryRangeCheckbox = new System.Windows.Forms.CheckBox();
+            this.cannyAveragingConstantNUD = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
+            this.bwAveragingConstantNUD = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.bwVerticalAverageHistogramCheckbox = new System.Windows.Forms.CheckBox();
+            this.bwHorizontalAverageHistogramCheckbox = new System.Windows.Forms.CheckBox();
+            this.cannyAvgVerticalHistogramCheckBox = new System.Windows.Forms.CheckBox();
+            this.cannyAvgHorziontalHistogramCheckbox = new System.Windows.Forms.CheckBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cannyVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteHorizontalRowGapNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cannyHoriztonalNumRowNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cannyAveragingConstantNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bwAveragingConstantNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // videoSourcePlayer1
@@ -200,19 +214,19 @@
             this.cannyPanel.TabIndex = 8;
             this.cannyPanel.Zoom = 1F;
             // 
-            // horionzontalHistogramCheckboxBW
+            // blackandwhiteBlobPanel
             // 
-            this.horionzontalHistogramCheckboxBW.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.horionzontalHistogramCheckboxBW.CanvasSize = new System.Drawing.Size(60, 40);
-            this.horionzontalHistogramCheckboxBW.Image = null;
-            this.horionzontalHistogramCheckboxBW.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.horionzontalHistogramCheckboxBW.Location = new System.Drawing.Point(1131, 572);
-            this.horionzontalHistogramCheckboxBW.Name = "horionzontalHistogramCheckboxBW";
-            this.horionzontalHistogramCheckboxBW.ROTATION = 0F;
-            this.horionzontalHistogramCheckboxBW.Size = new System.Drawing.Size(322, 257);
-            this.horionzontalHistogramCheckboxBW.TabIndex = 9;
-            this.horionzontalHistogramCheckboxBW.Zoom = 1F;
-            this.horionzontalHistogramCheckboxBW.Load += new System.EventHandler(this.scrollableImagePanel4_Load);
+            this.blackandwhiteBlobPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.blackandwhiteBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.blackandwhiteBlobPanel.Image = null;
+            this.blackandwhiteBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.blackandwhiteBlobPanel.Location = new System.Drawing.Point(1131, 572);
+            this.blackandwhiteBlobPanel.Name = "blackandwhiteBlobPanel";
+            this.blackandwhiteBlobPanel.ROTATION = 0F;
+            this.blackandwhiteBlobPanel.Size = new System.Drawing.Size(322, 257);
+            this.blackandwhiteBlobPanel.TabIndex = 9;
+            this.blackandwhiteBlobPanel.Zoom = 1F;
+            this.blackandwhiteBlobPanel.Load += new System.EventHandler(this.scrollableImagePanel4_Load);
             // 
             // cannyBlobPanel
             // 
@@ -268,7 +282,7 @@
             // 
             this.blackandwhiteLabel.AutoSize = true;
             this.blackandwhiteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.blackandwhiteLabel.Location = new System.Drawing.Point(698, 456);
+            this.blackandwhiteLabel.Location = new System.Drawing.Point(677, 461);
             this.blackandwhiteLabel.Name = "blackandwhiteLabel";
             this.blackandwhiteLabel.Size = new System.Drawing.Size(146, 16);
             this.blackandwhiteLabel.TabIndex = 15;
@@ -304,15 +318,15 @@
             this.blackandwhiteBlobDetectionLabel.TabIndex = 18;
             this.blackandwhiteBlobDetectionLabel.Text = "Black and White Blob Detection";
             // 
-            // blackandwhiteBlobMinSlider
+            // blobDetectionForm
             // 
-            this.blackandwhiteBlobMinSlider.Location = new System.Drawing.Point(1469, 600);
-            this.blackandwhiteBlobMinSlider.Maximum = 50;
-            this.blackandwhiteBlobMinSlider.Name = "blackandwhiteBlobMinSlider";
-            this.blackandwhiteBlobMinSlider.Size = new System.Drawing.Size(17, 205);
-            this.blackandwhiteBlobMinSlider.TabIndex = 19;
-            this.blackandwhiteBlobMinSlider.Value = 50;
-            this.blackandwhiteBlobMinSlider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.blackandwhiteBlobMinSlider_Scroll);
+            this.blobDetectionForm.Location = new System.Drawing.Point(1469, 600);
+            this.blobDetectionForm.Maximum = 50;
+            this.blobDetectionForm.Name = "blobDetectionForm";
+            this.blobDetectionForm.Size = new System.Drawing.Size(17, 205);
+            this.blobDetectionForm.TabIndex = 19;
+            this.blobDetectionForm.Value = 50;
+            this.blobDetectionForm.Scroll += new System.Windows.Forms.ScrollEventHandler(this.blackandwhiteBlobMinSlider_Scroll);
             // 
             // blackandwhiteBlobMaxSlider
             // 
@@ -773,7 +787,7 @@
             this.blackandwhiteHorizontalRowGapNUD.Size = new System.Drawing.Size(95, 20);
             this.blackandwhiteHorizontalRowGapNUD.TabIndex = 68;
             this.blackandwhiteHorizontalRowGapNUD.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -801,7 +815,7 @@
             // 
             this.cannyHoriztonalNumRowNUD.Location = new System.Drawing.Point(1037, 67);
             this.cannyHoriztonalNumRowNUD.Maximum = new decimal(new int[] {
-            45,
+            50,
             0,
             0,
             0});
@@ -814,7 +828,7 @@
             this.cannyHoriztonalNumRowNUD.Size = new System.Drawing.Size(88, 20);
             this.cannyHoriztonalNumRowNUD.TabIndex = 71;
             this.cannyHoriztonalNumRowNUD.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
@@ -843,15 +857,15 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // crossHareCanny
+            // crossHairCanny
             // 
-            this.crossHareCanny.AutoSize = true;
-            this.crossHareCanny.Location = new System.Drawing.Point(939, 151);
-            this.crossHareCanny.Name = "crossHareCanny";
-            this.crossHareCanny.Size = new System.Drawing.Size(69, 17);
-            this.crossHareCanny.TabIndex = 74;
-            this.crossHareCanny.Text = "Crosshair";
-            this.crossHareCanny.UseVisualStyleBackColor = true;
+            this.crossHairCanny.AutoSize = true;
+            this.crossHairCanny.Location = new System.Drawing.Point(939, 151);
+            this.crossHairCanny.Name = "crossHairCanny";
+            this.crossHairCanny.Size = new System.Drawing.Size(69, 17);
+            this.crossHairCanny.TabIndex = 74;
+            this.crossHairCanny.Text = "Crosshair";
+            this.crossHairCanny.UseVisualStyleBackColor = true;
             // 
             // verticalHistogramCheckboxCanny
             // 
@@ -872,6 +886,7 @@
             this.horizontalHistogramCheckboxCanny.TabIndex = 76;
             this.horizontalHistogramCheckboxCanny.Text = "Horizontal Histogram";
             this.horizontalHistogramCheckboxCanny.UseVisualStyleBackColor = true;
+            this.horizontalHistogramCheckboxCanny.CheckedChanged += new System.EventHandler(this.horizontalHistogramCheckboxCanny_CheckedChanged);
             // 
             // crosshairCheckboxBW
             // 
@@ -921,11 +936,161 @@
             this.button2.Text = "Vertical Histogram Color";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // blackandwhiteRowGapNUD
+            // cannyBoundryRangeCheckbox
+            // 
+            this.cannyBoundryRangeCheckbox.AutoSize = true;
+            this.cannyBoundryRangeCheckbox.Location = new System.Drawing.Point(937, 220);
+            this.cannyBoundryRangeCheckbox.Name = "cannyBoundryRangeCheckbox";
+            this.cannyBoundryRangeCheckbox.Size = new System.Drawing.Size(105, 17);
+            this.cannyBoundryRangeCheckbox.TabIndex = 82;
+            this.cannyBoundryRangeCheckbox.Text = "Boundry Ranges";
+            this.cannyBoundryRangeCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // bwBoundryRangeCheckbox
+            // 
+            this.bwBoundryRangeCheckbox.AutoSize = true;
+            this.bwBoundryRangeCheckbox.Location = new System.Drawing.Point(941, 694);
+            this.bwBoundryRangeCheckbox.Name = "bwBoundryRangeCheckbox";
+            this.bwBoundryRangeCheckbox.Size = new System.Drawing.Size(105, 17);
+            this.bwBoundryRangeCheckbox.TabIndex = 83;
+            this.bwBoundryRangeCheckbox.Text = "Boundry Ranges";
+            this.bwBoundryRangeCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // cannyAveragingConstantNUD
+            // 
+            this.cannyAveragingConstantNUD.Location = new System.Drawing.Point(1037, 280);
+            this.cannyAveragingConstantNUD.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.cannyAveragingConstantNUD.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.cannyAveragingConstantNUD.Name = "cannyAveragingConstantNUD";
+            this.cannyAveragingConstantNUD.Size = new System.Drawing.Size(88, 20);
+            this.cannyAveragingConstantNUD.TabIndex = 84;
+            this.cannyAveragingConstantNUD.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(939, 283);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(94, 13);
+            this.label19.TabIndex = 85;
+            this.label19.Text = "Averging Constant";
+            // 
+            // bwAveragingConstantNUD
+            // 
+            this.bwAveragingConstantNUD.Location = new System.Drawing.Point(1031, 757);
+            this.bwAveragingConstantNUD.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.bwAveragingConstantNUD.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.bwAveragingConstantNUD.Name = "bwAveragingConstantNUD";
+            this.bwAveragingConstantNUD.Size = new System.Drawing.Size(88, 20);
+            this.bwAveragingConstantNUD.TabIndex = 86;
+            this.bwAveragingConstantNUD.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(933, 760);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(94, 13);
+            this.label20.TabIndex = 87;
+            this.label20.Text = "Averging Constant";
+            // 
+            // bwVerticalAverageHistogramCheckbox
+            // 
+            this.bwVerticalAverageHistogramCheckbox.AutoSize = true;
+            this.bwVerticalAverageHistogramCheckbox.Location = new System.Drawing.Point(941, 716);
+            this.bwVerticalAverageHistogramCheckbox.Name = "bwVerticalAverageHistogramCheckbox";
+            this.bwVerticalAverageHistogramCheckbox.Size = new System.Drawing.Size(154, 17);
+            this.bwVerticalAverageHistogramCheckbox.TabIndex = 88;
+            this.bwVerticalAverageHistogramCheckbox.Text = "Vertical Average Histogram";
+            this.bwVerticalAverageHistogramCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // bwHorizontalAverageHistogramCheckbox
+            // 
+            this.bwHorizontalAverageHistogramCheckbox.AutoSize = true;
+            this.bwHorizontalAverageHistogramCheckbox.Location = new System.Drawing.Point(941, 737);
+            this.bwHorizontalAverageHistogramCheckbox.Name = "bwHorizontalAverageHistogramCheckbox";
+            this.bwHorizontalAverageHistogramCheckbox.Size = new System.Drawing.Size(166, 17);
+            this.bwHorizontalAverageHistogramCheckbox.TabIndex = 89;
+            this.bwHorizontalAverageHistogramCheckbox.Text = "Horizontal Average Histogram";
+            this.bwHorizontalAverageHistogramCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // cannyAvgVerticalHistogramCheckBox
+            // 
+            this.cannyAvgVerticalHistogramCheckBox.AutoSize = true;
+            this.cannyAvgVerticalHistogramCheckBox.Location = new System.Drawing.Point(937, 241);
+            this.cannyAvgVerticalHistogramCheckBox.Name = "cannyAvgVerticalHistogramCheckBox";
+            this.cannyAvgVerticalHistogramCheckBox.Size = new System.Drawing.Size(154, 17);
+            this.cannyAvgVerticalHistogramCheckBox.TabIndex = 90;
+            this.cannyAvgVerticalHistogramCheckBox.Text = "Vertical Average Histogram";
+            this.cannyAvgVerticalHistogramCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // cannyAvgHorziontalHistogramCheckbox
+            // 
+            this.cannyAvgHorziontalHistogramCheckbox.AutoSize = true;
+            this.cannyAvgHorziontalHistogramCheckbox.Location = new System.Drawing.Point(937, 262);
+            this.cannyAvgHorziontalHistogramCheckbox.Name = "cannyAvgHorziontalHistogramCheckbox";
+            this.cannyAvgHorziontalHistogramCheckbox.Size = new System.Drawing.Size(166, 17);
+            this.cannyAvgHorziontalHistogramCheckbox.TabIndex = 91;
+            this.cannyAvgHorziontalHistogramCheckbox.Text = "Horizontal Average Histogram";
+            this.cannyAvgHorziontalHistogramCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(873, 809);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(44, 20);
+            this.textBox1.TabIndex = 92;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(773, 812);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(13, 13);
+            this.label21.TabIndex = 93;
+            this.label21.Text = "0";
+            // 
+            // cannyMinBlobSize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1532, 846);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.cannyAvgHorziontalHistogramCheckbox);
+            this.Controls.Add(this.cannyAvgVerticalHistogramCheckBox);
+            this.Controls.Add(this.bwHorizontalAverageHistogramCheckbox);
+            this.Controls.Add(this.bwVerticalAverageHistogramCheckbox);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.bwAveragingConstantNUD);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.cannyAveragingConstantNUD);
+            this.Controls.Add(this.bwBoundryRangeCheckbox);
+            this.Controls.Add(this.cannyBoundryRangeCheckbox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.horizontalHistogramCheckboxBW);
@@ -933,7 +1098,7 @@
             this.Controls.Add(this.crosshairCheckboxBW);
             this.Controls.Add(this.horizontalHistogramCheckboxCanny);
             this.Controls.Add(this.verticalHistogramCheckboxCanny);
-            this.Controls.Add(this.crossHareCanny);
+            this.Controls.Add(this.crossHairCanny);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.cannyHoriztonalNumRowNUD);
@@ -982,7 +1147,7 @@
             this.Controls.Add(this.cannyBlobMinSlider);
             this.Controls.Add(this.cannyBlobMaxSlider);
             this.Controls.Add(this.blackandwhiteBlobMaxSlider);
-            this.Controls.Add(this.blackandwhiteBlobMinSlider);
+            this.Controls.Add(this.blobDetectionForm);
             this.Controls.Add(this.blackandwhiteBlobDetectionLabel);
             this.Controls.Add(this.cannyBlobDetection);
             this.Controls.Add(this.cannyLabel);
@@ -992,7 +1157,7 @@
             this.Controls.Add(this.blueSlider);
             this.Controls.Add(this.redSlider);
             this.Controls.Add(this.cannyBlobPanel);
-            this.Controls.Add(this.horionzontalHistogramCheckboxBW);
+            this.Controls.Add(this.blackandwhiteBlobPanel);
             this.Controls.Add(this.cannyPanel);
             this.Controls.Add(this.blackandwhitePanel);
             this.Controls.Add(this.crossHareCheckBox);
@@ -1001,13 +1166,15 @@
             this.Controls.Add(this.RecordBtn);
             this.Controls.Add(this.liveVideoSource);
             this.Controls.Add(this.videoSourcePlayer1);
-            this.Name = "blackandwhiteRowGapNUD";
+            this.Name = "cannyMinBlobSize";
             this.Text = "Blob Detection Application";
             this.Load += new System.EventHandler(this.BlobDetection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cannyVerticalNumRowNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteVerticalNumRowNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteHorizontalRowGapNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cannyHoriztonalNumRowNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cannyAveragingConstantNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bwAveragingConstantNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1023,7 +1190,7 @@
         private CustomTools.ScrollableImagePanel crossHareCheckBox;
         private CustomTools.ScrollableImagePanel blackandwhitePanel;
         private CustomTools.ScrollableImagePanel cannyPanel;
-        private CustomTools.ScrollableImagePanel horionzontalHistogramCheckboxBW;
+        private CustomTools.ScrollableImagePanel blackandwhiteBlobPanel;
         private CustomTools.ScrollableImagePanel cannyBlobPanel;
         private System.Windows.Forms.HScrollBar redSlider;
         private System.Windows.Forms.HScrollBar blueSlider;
@@ -1033,7 +1200,7 @@
         private System.Windows.Forms.Label cannyLabel;
         private System.Windows.Forms.Label cannyBlobDetection;
         private System.Windows.Forms.Label blackandwhiteBlobDetectionLabel;
-        private System.Windows.Forms.VScrollBar blackandwhiteBlobMinSlider;
+        private System.Windows.Forms.VScrollBar blobDetectionForm;
         private System.Windows.Forms.VScrollBar blackandwhiteBlobMaxSlider;
         private System.Windows.Forms.VScrollBar cannyBlobMaxSlider;
         private System.Windows.Forms.VScrollBar cannyBlobMinSlider;
@@ -1083,7 +1250,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.CheckBox crossHareCanny;
+        private System.Windows.Forms.CheckBox crossHairCanny;
         private System.Windows.Forms.CheckBox verticalHistogramCheckboxCanny;
         private System.Windows.Forms.CheckBox horizontalHistogramCheckboxCanny;
         private System.Windows.Forms.CheckBox crosshairCheckboxBW;
@@ -1091,6 +1258,18 @@
         private System.Windows.Forms.CheckBox horizontalHistogramCheckboxBW;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox cannyBoundryRangeCheckbox;
+        private System.Windows.Forms.CheckBox bwBoundryRangeCheckbox;
+        private System.Windows.Forms.NumericUpDown cannyAveragingConstantNUD;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown bwAveragingConstantNUD;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox bwVerticalAverageHistogramCheckbox;
+        private System.Windows.Forms.CheckBox bwHorizontalAverageHistogramCheckbox;
+        private System.Windows.Forms.CheckBox cannyAvgVerticalHistogramCheckBox;
+        private System.Windows.Forms.CheckBox cannyAvgHorziontalHistogramCheckbox;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label21;
     }
 }
 
