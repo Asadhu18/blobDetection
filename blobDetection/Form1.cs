@@ -28,6 +28,8 @@ namespace blobDetection
         public Color horizontalColor = new Color();
         public int blackandwhiteHistogramToggle = 1;
         public int cannyHistogramToggle = 1;
+        public int liveVideoToggle = 0;
+        public int uploadedImageToggle = 0;
 
 
         public cannyMinBlobSize()
@@ -75,8 +77,25 @@ namespace blobDetection
             GammaCorrection gamaFilter = new GammaCorrection((gamaSlider1.Value)/100.0);
             ContrastCorrection contrastFilter = new ContrastCorrection(contrastSlider.Value);
             GaussianSharpen gausianSharpenFilter = new GaussianSharpen();
-            Bitmap capturedColorImage = (Bitmap)videoSourcePlayer1.GetCurrentVideoFrame();
-            
+            Bitmap capturedColorImage = new Bitmap(100,100);
+            if (liveVideoToggle % 2 == 0)
+            {
+                timer1.Start();
+                capturedColorImage = (Bitmap)videoSourcePlayer1.GetCurrentVideoFrame();
+            }
+            if (liveVideoToggle % 2 == 1)
+            {
+                timer1.Stop();
+                OpenFileDialog open = new OpenFileDialog();
+                open.Filter = "Image Files(*.jpeg;*.bmp;*.png;*.jpg)|*.jpeg;*.bmp;*.png;*.jpg";
+                String selectedFile="";
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    selectedFile = open.FileName;
+                }
+                capturedColorImage = (Bitmap)System.Drawing.Image.FromFile(selectedFile);
+            }
+
             capturedColorImage = gamaFilter.Apply(capturedColorImage);
             capturedColorImage = contrastFilter.Apply(capturedColorImage);
             capturedImagePanel.Image = capturedColorImage;
@@ -361,9 +380,7 @@ namespace blobDetection
 
             for (int b = 0; b < height; b++)
             {
-               
                 histogramVerticalData[b] = sumArrayVertical[b] / divisorV;
-                
             }
             
             for (int z = 0; z < width-1; z++)
@@ -390,7 +407,7 @@ namespace blobDetection
             }
             if (crosshairCheckboxBW.Checked || crossHairCanny.Checked)
             {
-                tempBitmap = drawCrossHair(histogramVerticalData, histogramHorizontalData, inAvergingConstant, tempBitmap);
+                tempBitmap = drawCrossHair(histogramVerticalData, histogramHorizontalData, inAvergingConstant, tempBitmap,imageByteArray);
             }
             
             //g.DrawLine(fuschiaPen, minValHindex, 0, minValHindex, height);
@@ -705,7 +722,7 @@ namespace blobDetection
             return intersectionRectangle;
 
         }
-        public Bitmap drawCrossHair(float[] verticalPixelValues, float[] horizontalPixelValues, int averagingConstant, Bitmap originalImage) {
+        public Bitmap drawCrossHair(float[] verticalPixelValues, float[] horizontalPixelValues, int averagingConstant, Bitmap originalImage,Byte[] imageData) {
 
             float[] avgVerticalValues = new float[(int)(verticalPixelValues.Length / averagingConstant)];
             float[] avgHorizontalValues = new float[(int)(horizontalPixelValues.Length / averagingConstant)];
@@ -770,6 +787,8 @@ namespace blobDetection
             g.DrawLine(redPen, 0, verticalMidpoint, Width, verticalMidpoint);
             g.DrawLine(redPen, horizontalMidpoint, 0, horizontalMidpoint, Height);
             g.DrawEllipse(redPen, horizontalMidpoint - 15, verticalMidpoint - 15, 30, 30);
+            System.Drawing.Point centerPoint = new System.Drawing.Point(verticalMidpoint, horizontalMidpoint);
+            
             if (avgHorizontalValues.Length>1&&avgVerticalValues.Length>1)
             {
                 if (cannyAvgHorziontalHistogramCheckbox.Checked || bwHorizontalAverageHistogramCheckbox.Checked)
@@ -797,13 +816,11 @@ namespace blobDetection
                     }
                 }
             }
-            System.Drawing.Point centerPoint = new System.Drawing.Point(horizontalMidpoint, verticalMidpoint);
-            
-            label21.Text = (horizontalAlignment(centerPoint, 20, tempBitmap).ToString());
+            label21.Text = horizontalAlignment(centerPoint, (int)rowGapNUD.Value, 5, tempBitmap,imageData).ToString();
             return tempBitmap;
 
         }
-    public int horizontalAlignment(System.Drawing.Point inCenter,int inDistanceFromCenter,Bitmap inImage)
+    public double horizontalAlignment(System.Drawing.Point inCenter,int inDistanceFromCenter,int numRows,Bitmap inImage,Byte[] inImageData)
     {
             float xValue = inCenter.X;
             
@@ -813,6 +830,8 @@ namespace blobDetection
             int bottomIndexFirstBlackPixel = 0;
             int width = inImage.Width;
             int height = inImage.Height;
+            int topAverage = 0;
+            int bottomAverage = 0;
             float[] topLineValues = new float[width - 1];
             float[] bottomLineValues = new float[width - 1];
             Bitmap imageClone = (Bitmap)inImage;
@@ -827,16 +846,33 @@ namespace blobDetection
             Pen greenPen = new Pen(Color.Green, 5.0f);
             g.DrawLine(greenPen,0,topLine,width,topLine);
             g.DrawLine(greenPen, 0, bottomLine, width, bottomLine);
+
             if (topLine > 0 && bottomLine > 0&&bottomLine<480&&topLine<480)
             {
+
+                //for (int i = 0; i < width - 1; i++)
+                //{
+                //    for (int rowOffset = 0; rowOffset < numRows; rowOffset++)
+                //    {
+                //        topAverage += inImageData[((topLine - rowOffset) * width) + i];
+                //        bottomAverage += inImageData[((bottomLine + rowOffset) * width) + i];
+                //    }
+                //    topAverage /= numRows;
+                //    bottomAverage /= numRows;
+                //    topLineValues[i] = imageByteArray[((topLine * stride) + i)];//topAverage;
+                //    bottomLineValues[i] = imageByteArray[(bottomLine * stride) + i];//bottomAverage;
+                //    topAverage = 0;
+                //    bottomAverage = 0;
+                //}
                 for (int i = 0; i < width - 1; i++)
                 {
-                    topLineValues[i] = imageByteArray[(topLine * stride) + i];
-                    bottomLineValues[i] = imageByteArray[(bottomLine * stride) + i];
+                    topLineValues[i] = inImageData[(topLine * width) + i];
+                    bottomLineValues[i] = inImageData[(bottomLine * width) + i];
                 }
             }
             for (int j = 0; j < topLineValues.Length; j++)
             {
+
                 if (topLineValues[j] == 0)
                 {
                     topIndexFirstBlackPixel = j;
@@ -851,15 +887,35 @@ namespace blobDetection
                     break;
                 }
             }
+           
             int deltaX = Math.Abs(topIndexFirstBlackPixel - bottomIndexFirstBlackPixel);
-            
-            return deltaX;
+            if (deltaX != 0)
+            {
+                double ratio = (20) / deltaX;
+                double radianTurn = Math.Atan(ratio);
+                double degreeTurn = 90 - (radianTurn * (180.0 / Math.PI));
+                return degreeTurn;
+            }
+            return 0.0;
 
         }
 
         private void horizontalHistogramCheckboxCanny_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void uploadImage_Click(object sender, EventArgs e)
+        {
+            liveVideoToggle++;
+            //OpenFileDialog open = new OpenFileDialog();
+            //open.Filter = "Image Files(*.jpeg;*.bmp;*.png;*.jpg)|*.jpeg;*.bmp;*.png;*.jpg";
+            //String selectedFile="";
+            //if (open.ShowDialog() == DialogResult.OK)
+            //{
+            //    selectedFile = open.FileName;
+            //}
+            //grayScalePanel.Image = (Bitmap)System.Drawing.Image.FromFile(selectedFile);
         }
     }
 }

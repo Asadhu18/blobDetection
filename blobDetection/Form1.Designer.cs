@@ -115,14 +115,18 @@
             this.bwHorizontalAverageHistogramCheckbox = new System.Windows.Forms.CheckBox();
             this.cannyAvgVerticalHistogramCheckBox = new System.Windows.Forms.CheckBox();
             this.cannyAvgHorziontalHistogramCheckbox = new System.Windows.Forms.CheckBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.rowGapNUD = new System.Windows.Forms.NumericUpDown();
+            this.uploadImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cannyVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteHorizontalRowGapNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cannyHoriztonalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cannyAveragingConstantNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bwAveragingConstantNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowGapNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // videoSourcePlayer1
@@ -703,7 +707,7 @@
             this.blackandwhiteHorizontalHistogramSlider.Name = "blackandwhiteHorizontalHistogramSlider";
             this.blackandwhiteHorizontalHistogramSlider.Size = new System.Drawing.Size(330, 11);
             this.blackandwhiteHorizontalHistogramSlider.TabIndex = 63;
-            this.blackandwhiteHorizontalHistogramSlider.Value = 320;
+            this.blackandwhiteHorizontalHistogramSlider.Value = 100;
             this.blackandwhiteHorizontalHistogramSlider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.blackandwhiteHorizontalHistogramSlider_Scroll);
             // 
             // cannyVerticalHistogramSlider
@@ -723,7 +727,7 @@
             this.blackandwhiteVerticalHistogramSlider.Name = "blackandwhiteVerticalHistogramSlider";
             this.blackandwhiteVerticalHistogramSlider.Size = new System.Drawing.Size(17, 253);
             this.blackandwhiteVerticalHistogramSlider.TabIndex = 65;
-            this.blackandwhiteVerticalHistogramSlider.Value = 240;
+            this.blackandwhiteVerticalHistogramSlider.Value = 75;
             this.blackandwhiteVerticalHistogramSlider.Scroll += new System.Windows.Forms.ScrollEventHandler(this.blackandwhiteVerticalHistogramSlider_Scroll);
             // 
             // cannyVerticalNumRowNUD
@@ -1058,29 +1062,72 @@
             this.cannyAvgHorziontalHistogramCheckbox.Text = "Horizontal Average Histogram";
             this.cannyAvgHorziontalHistogramCheckbox.UseVisualStyleBackColor = true;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(873, 809);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(44, 20);
-            this.textBox1.TabIndex = 92;
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(773, 812);
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(1033, 812);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(13, 13);
+            this.label21.Size = new System.Drawing.Size(18, 20);
             this.label21.TabIndex = 93;
             this.label21.Text = "0";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(954, 816);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(73, 13);
+            this.label22.TabIndex = 94;
+            this.label22.Text = "Degree Offset";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(934, 786);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(52, 13);
+            this.label23.TabIndex = 95;
+            this.label23.Text = "Row Gap";
+            // 
+            // rowGapNUD
+            // 
+            this.rowGapNUD.Location = new System.Drawing.Point(1031, 783);
+            this.rowGapNUD.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.rowGapNUD.Name = "rowGapNUD";
+            this.rowGapNUD.Size = new System.Drawing.Size(88, 20);
+            this.rowGapNUD.TabIndex = 96;
+            this.rowGapNUD.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // uploadImage
+            // 
+            this.uploadImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uploadImage.Location = new System.Drawing.Point(76, 352);
+            this.uploadImage.Name = "uploadImage";
+            this.uploadImage.Size = new System.Drawing.Size(135, 30);
+            this.uploadImage.TabIndex = 97;
+            this.uploadImage.Text = "Upload Image";
+            this.uploadImage.UseVisualStyleBackColor = true;
+            this.uploadImage.Click += new System.EventHandler(this.uploadImage_Click);
             // 
             // cannyMinBlobSize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1532, 846);
+            this.Controls.Add(this.uploadImage);
+            this.Controls.Add(this.rowGapNUD);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cannyAvgHorziontalHistogramCheckbox);
             this.Controls.Add(this.cannyAvgVerticalHistogramCheckBox);
             this.Controls.Add(this.bwHorizontalAverageHistogramCheckbox);
@@ -1175,6 +1222,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cannyHoriztonalNumRowNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cannyAveragingConstantNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bwAveragingConstantNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowGapNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1268,8 +1316,11 @@
         private System.Windows.Forms.CheckBox bwHorizontalAverageHistogramCheckbox;
         private System.Windows.Forms.CheckBox cannyAvgVerticalHistogramCheckBox;
         private System.Windows.Forms.CheckBox cannyAvgHorziontalHistogramCheckbox;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown rowGapNUD;
+        private System.Windows.Forms.Button uploadImage;
     }
 }
 
