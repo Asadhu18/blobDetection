@@ -34,7 +34,7 @@
             this.RecordBtn = new System.Windows.Forms.Button();
             this.videoSourceList = new System.Windows.Forms.ComboBox();
             this.grayScale = new System.Windows.Forms.Label();
-            this.crossHareCheckBox = new CustomTools.ScrollableImagePanel();
+            this.grayBlobPanel = new CustomTools.ScrollableImagePanel();
             this.blackandwhitePanel = new CustomTools.ScrollableImagePanel();
             this.cannyPanel = new CustomTools.ScrollableImagePanel();
             this.blackandwhiteBlobPanel = new CustomTools.ScrollableImagePanel();
@@ -82,8 +82,8 @@
             this.cannyHistogramBtn = new System.Windows.Forms.Button();
             this.blackandwhiteHistorgrambtn = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.horizontalColorBtn = new System.Windows.Forms.Button();
-            this.verticalColorBtn = new System.Windows.Forms.Button();
+            this.cannyHorizontalColorBtn = new System.Windows.Forms.Button();
+            this.cannyVerticalColorBtn = new System.Windows.Forms.Button();
             this.cannyHorizontalHistogramSlider = new System.Windows.Forms.HScrollBar();
             this.blackandwhiteHorizontalHistogramSlider = new System.Windows.Forms.HScrollBar();
             this.cannyVerticalHistogramSlider = new System.Windows.Forms.VScrollBar();
@@ -103,8 +103,8 @@
             this.crosshairCheckboxBW = new System.Windows.Forms.CheckBox();
             this.verticalHistogramCheckboxBW = new System.Windows.Forms.CheckBox();
             this.horizontalHistogramCheckboxBW = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.bwHoriztonalHistogramColorBtn = new System.Windows.Forms.Button();
+            this.bwVerticalHistogramColroBtn = new System.Windows.Forms.Button();
             this.cannyBoundryRangeCheckbox = new System.Windows.Forms.CheckBox();
             this.bwBoundryRangeCheckbox = new System.Windows.Forms.CheckBox();
             this.cannyAveragingConstantNUD = new System.Windows.Forms.NumericUpDown();
@@ -120,6 +120,9 @@
             this.label23 = new System.Windows.Forms.Label();
             this.rowGapNUD = new System.Windows.Forms.NumericUpDown();
             this.uploadImage = new System.Windows.Forms.Button();
+            this.captureImageButton = new System.Windows.Forms.Button();
+            this.checkboxAutoProcess = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.cannyVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteVerticalNumRowNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blackandwhiteHorizontalRowGapNUD)).BeginInit();
@@ -179,18 +182,18 @@
             this.grayScale.TabIndex = 5;
             this.grayScale.Text = "Gray Scale Image";
             // 
-            // crossHareCheckBox
+            // grayBlobPanel
             // 
-            this.crossHareCheckBox.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.crossHareCheckBox.CanvasSize = new System.Drawing.Size(60, 40);
-            this.crossHareCheckBox.Image = null;
-            this.crossHareCheckBox.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.crossHareCheckBox.Location = new System.Drawing.Point(1131, 296);
-            this.crossHareCheckBox.Name = "crossHareCheckBox";
-            this.crossHareCheckBox.ROTATION = 0F;
-            this.crossHareCheckBox.Size = new System.Drawing.Size(322, 250);
-            this.crossHareCheckBox.TabIndex = 6;
-            this.crossHareCheckBox.Zoom = 1F;
+            this.grayBlobPanel.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.grayBlobPanel.CanvasSize = new System.Drawing.Size(60, 40);
+            this.grayBlobPanel.Image = null;
+            this.grayBlobPanel.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.grayBlobPanel.Location = new System.Drawing.Point(1131, 296);
+            this.grayBlobPanel.Name = "grayBlobPanel";
+            this.grayBlobPanel.ROTATION = 0F;
+            this.grayBlobPanel.Size = new System.Drawing.Size(322, 250);
+            this.grayBlobPanel.TabIndex = 6;
+            this.grayBlobPanel.Zoom = 1F;
             // 
             // blackandwhitePanel
             // 
@@ -530,7 +533,7 @@
             this.blobDetect.Name = "blobDetect";
             this.blobDetect.Size = new System.Drawing.Size(135, 30);
             this.blobDetect.TabIndex = 40;
-            this.blobDetect.Text = "Detect Blobs";
+            this.blobDetect.Text = "Process Image";
             this.blobDetect.UseVisualStyleBackColor = true;
             this.blobDetect.Click += new System.EventHandler(this.blobDetect_Click);
             // 
@@ -662,7 +665,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(188, 762);
+            this.checkBox2.Location = new System.Drawing.Point(162, 759);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(108, 17);
             this.checkBox2.TabIndex = 57;
@@ -670,25 +673,25 @@
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // horizontalColorBtn
+            // cannyHorizontalColorBtn
             // 
-            this.horizontalColorBtn.Location = new System.Drawing.Point(937, 93);
-            this.horizontalColorBtn.Name = "horizontalColorBtn";
-            this.horizontalColorBtn.Size = new System.Drawing.Size(87, 51);
-            this.horizontalColorBtn.TabIndex = 60;
-            this.horizontalColorBtn.Text = "Horizontal Histogram Color";
-            this.horizontalColorBtn.UseVisualStyleBackColor = true;
-            this.horizontalColorBtn.Click += new System.EventHandler(this.horizontalColorBtn_Click);
+            this.cannyHorizontalColorBtn.Location = new System.Drawing.Point(937, 93);
+            this.cannyHorizontalColorBtn.Name = "cannyHorizontalColorBtn";
+            this.cannyHorizontalColorBtn.Size = new System.Drawing.Size(87, 51);
+            this.cannyHorizontalColorBtn.TabIndex = 60;
+            this.cannyHorizontalColorBtn.Text = "Horizontal Histogram Color";
+            this.cannyHorizontalColorBtn.UseVisualStyleBackColor = true;
+            this.cannyHorizontalColorBtn.Click += new System.EventHandler(this.horizontalColorBtn_Click);
             // 
-            // verticalColorBtn
+            // cannyVerticalColorBtn
             // 
-            this.verticalColorBtn.Location = new System.Drawing.Point(1037, 93);
-            this.verticalColorBtn.Name = "verticalColorBtn";
-            this.verticalColorBtn.Size = new System.Drawing.Size(88, 51);
-            this.verticalColorBtn.TabIndex = 61;
-            this.verticalColorBtn.Text = "Vertical Histogram Color";
-            this.verticalColorBtn.UseVisualStyleBackColor = true;
-            this.verticalColorBtn.Click += new System.EventHandler(this.verticalColorBtn_Click);
+            this.cannyVerticalColorBtn.Location = new System.Drawing.Point(1037, 93);
+            this.cannyVerticalColorBtn.Name = "cannyVerticalColorBtn";
+            this.cannyVerticalColorBtn.Size = new System.Drawing.Size(88, 51);
+            this.cannyVerticalColorBtn.TabIndex = 61;
+            this.cannyVerticalColorBtn.Text = "Vertical Histogram Color";
+            this.cannyVerticalColorBtn.UseVisualStyleBackColor = true;
+            this.cannyVerticalColorBtn.Click += new System.EventHandler(this.verticalColorBtn_Click);
             // 
             // cannyHorizontalHistogramSlider
             // 
@@ -901,6 +904,7 @@
             this.crosshairCheckboxBW.TabIndex = 77;
             this.crosshairCheckboxBW.Text = "Crosshair";
             this.crosshairCheckboxBW.UseVisualStyleBackColor = true;
+            this.crosshairCheckboxBW.CheckedChanged += new System.EventHandler(this.crosshairCheckboxBW_CheckedChanged);
             // 
             // verticalHistogramCheckboxBW
             // 
@@ -922,23 +926,25 @@
             this.horizontalHistogramCheckboxBW.Text = "Horizonatal Histogram";
             this.horizontalHistogramCheckboxBW.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // bwHoriztonalHistogramColorBtn
             // 
-            this.button1.Location = new System.Drawing.Point(932, 555);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 51);
-            this.button1.TabIndex = 80;
-            this.button1.Text = "Horizontal Histogram Color";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bwHoriztonalHistogramColorBtn.Location = new System.Drawing.Point(932, 555);
+            this.bwHoriztonalHistogramColorBtn.Name = "bwHoriztonalHistogramColorBtn";
+            this.bwHoriztonalHistogramColorBtn.Size = new System.Drawing.Size(87, 51);
+            this.bwHoriztonalHistogramColorBtn.TabIndex = 80;
+            this.bwHoriztonalHistogramColorBtn.Text = "Horizontal Histogram Color";
+            this.bwHoriztonalHistogramColorBtn.UseVisualStyleBackColor = true;
+            this.bwHoriztonalHistogramColorBtn.Click += new System.EventHandler(this.bwHoriztonalHistogramColorBtn_Click);
             // 
-            // button2
+            // bwVerticalHistogramColroBtn
             // 
-            this.button2.Location = new System.Drawing.Point(1028, 556);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 51);
-            this.button2.TabIndex = 81;
-            this.button2.Text = "Vertical Histogram Color";
-            this.button2.UseVisualStyleBackColor = true;
+            this.bwVerticalHistogramColroBtn.Location = new System.Drawing.Point(1028, 556);
+            this.bwVerticalHistogramColroBtn.Name = "bwVerticalHistogramColroBtn";
+            this.bwVerticalHistogramColroBtn.Size = new System.Drawing.Size(88, 51);
+            this.bwVerticalHistogramColroBtn.TabIndex = 81;
+            this.bwVerticalHistogramColroBtn.Text = "Vertical Histogram Color";
+            this.bwVerticalHistogramColroBtn.UseVisualStyleBackColor = true;
+            this.bwVerticalHistogramColroBtn.Click += new System.EventHandler(this.bwVerticalHistogramColroBtn_Click);
             // 
             // cannyBoundryRangeCheckbox
             // 
@@ -1114,15 +1120,51 @@
             this.uploadImage.Name = "uploadImage";
             this.uploadImage.Size = new System.Drawing.Size(135, 30);
             this.uploadImage.TabIndex = 97;
-            this.uploadImage.Text = "Upload Image";
+            this.uploadImage.Text = "Load Image";
             this.uploadImage.UseVisualStyleBackColor = true;
             this.uploadImage.Click += new System.EventHandler(this.uploadImage_Click);
+            // 
+            // captureImageButton
+            // 
+            this.captureImageButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.captureImageButton.Location = new System.Drawing.Point(76, 397);
+            this.captureImageButton.Name = "captureImageButton";
+            this.captureImageButton.Size = new System.Drawing.Size(135, 30);
+            this.captureImageButton.TabIndex = 99;
+            this.captureImageButton.Text = "Capture Image";
+            this.captureImageButton.UseVisualStyleBackColor = true;
+            this.captureImageButton.Click += new System.EventHandler(this.captureImageButton_Click);
+            // 
+            // checkboxAutoProcess
+            // 
+            this.checkboxAutoProcess.AutoSize = true;
+            this.checkboxAutoProcess.Location = new System.Drawing.Point(92, 433);
+            this.checkboxAutoProcess.Name = "checkboxAutoProcess";
+            this.checkboxAutoProcess.Size = new System.Drawing.Size(89, 17);
+            this.checkboxAutoProcess.TabIndex = 100;
+            this.checkboxAutoProcess.Text = "Auto Process";
+            this.checkboxAutoProcess.UseVisualStyleBackColor = true;
+            this.checkboxAutoProcess.CheckedChanged += new System.EventHandler(this.checkboxAutoProcess_CheckedChanged_1);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(266, 758);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(86, 17);
+            this.checkBox1.TabIndex = 101;
+            this.checkBox1.Text = "Gausian Blur";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // cannyMinBlobSize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1532, 846);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkboxAutoProcess);
+            this.Controls.Add(this.captureImageButton);
             this.Controls.Add(this.uploadImage);
             this.Controls.Add(this.rowGapNUD);
             this.Controls.Add(this.label23);
@@ -1138,8 +1180,8 @@
             this.Controls.Add(this.cannyAveragingConstantNUD);
             this.Controls.Add(this.bwBoundryRangeCheckbox);
             this.Controls.Add(this.cannyBoundryRangeCheckbox);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bwVerticalHistogramColroBtn);
+            this.Controls.Add(this.bwHoriztonalHistogramColorBtn);
             this.Controls.Add(this.horizontalHistogramCheckboxBW);
             this.Controls.Add(this.verticalHistogramCheckboxBW);
             this.Controls.Add(this.crosshairCheckboxBW);
@@ -1158,8 +1200,8 @@
             this.Controls.Add(this.cannyVerticalHistogramSlider);
             this.Controls.Add(this.blackandwhiteHorizontalHistogramSlider);
             this.Controls.Add(this.cannyHorizontalHistogramSlider);
-            this.Controls.Add(this.verticalColorBtn);
-            this.Controls.Add(this.horizontalColorBtn);
+            this.Controls.Add(this.cannyVerticalColorBtn);
+            this.Controls.Add(this.cannyHorizontalColorBtn);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.blackandwhiteHistorgrambtn);
             this.Controls.Add(this.cannyHistogramBtn);
@@ -1207,7 +1249,7 @@
             this.Controls.Add(this.blackandwhiteBlobPanel);
             this.Controls.Add(this.cannyPanel);
             this.Controls.Add(this.blackandwhitePanel);
-            this.Controls.Add(this.crossHareCheckBox);
+            this.Controls.Add(this.grayBlobPanel);
             this.Controls.Add(this.grayScale);
             this.Controls.Add(this.videoSourceList);
             this.Controls.Add(this.RecordBtn);
@@ -1235,7 +1277,7 @@
         private System.Windows.Forms.Button RecordBtn;
         private System.Windows.Forms.ComboBox videoSourceList;
         private System.Windows.Forms.Label grayScale;
-        private CustomTools.ScrollableImagePanel crossHareCheckBox;
+        private CustomTools.ScrollableImagePanel grayBlobPanel;
         private CustomTools.ScrollableImagePanel blackandwhitePanel;
         private CustomTools.ScrollableImagePanel cannyPanel;
         private CustomTools.ScrollableImagePanel blackandwhiteBlobPanel;
@@ -1283,8 +1325,8 @@
         private System.Windows.Forms.Button cannyHistogramBtn;
         private System.Windows.Forms.Button blackandwhiteHistorgrambtn;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button horizontalColorBtn;
-        private System.Windows.Forms.Button verticalColorBtn;
+        private System.Windows.Forms.Button cannyHorizontalColorBtn;
+        private System.Windows.Forms.Button cannyVerticalColorBtn;
         private System.Windows.Forms.HScrollBar cannyHorizontalHistogramSlider;
         private System.Windows.Forms.HScrollBar blackandwhiteHorizontalHistogramSlider;
         private System.Windows.Forms.VScrollBar cannyVerticalHistogramSlider;
@@ -1304,8 +1346,8 @@
         private System.Windows.Forms.CheckBox crosshairCheckboxBW;
         private System.Windows.Forms.CheckBox verticalHistogramCheckboxBW;
         private System.Windows.Forms.CheckBox horizontalHistogramCheckboxBW;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button bwHoriztonalHistogramColorBtn;
+        private System.Windows.Forms.Button bwVerticalHistogramColroBtn;
         private System.Windows.Forms.CheckBox cannyBoundryRangeCheckbox;
         private System.Windows.Forms.CheckBox bwBoundryRangeCheckbox;
         private System.Windows.Forms.NumericUpDown cannyAveragingConstantNUD;
@@ -1321,6 +1363,9 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.NumericUpDown rowGapNUD;
         private System.Windows.Forms.Button uploadImage;
+        private System.Windows.Forms.Button captureImageButton;
+        public System.Windows.Forms.CheckBox checkboxAutoProcess;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
