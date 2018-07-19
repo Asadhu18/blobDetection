@@ -14,6 +14,9 @@ using AForge.Math;
 using AForge.Math.Geometry;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
+using Accord;
+using Accord.Imaging;
+using Accord.Imaging.Moments;
 
 namespace blobDetection
 {
@@ -42,7 +45,7 @@ namespace blobDetection
 
         }
 
-        private System.Drawing.Point[] ToPointsArray(List<IntPoint> points)
+        private System.Drawing.Point[] ToPointsArray(List<AForge.IntPoint> points)
         {
             System.Drawing.Point[] array = new System.Drawing.Point[points.Count];
             return array;
@@ -77,6 +80,7 @@ namespace blobDetection
             Bitmap capturedColorImage = new Bitmap(100,100);
             workingImage = (Bitmap)videoSourcePlayer1.GetCurrentVideoFrame();
             capturedColorImage = (Bitmap)workingImage.Clone();
+            workingImage = capturedColorImage;
             return capturedColorImage;
         }
         public void processWorkingImage(Bitmap inImage)
@@ -87,8 +91,7 @@ namespace blobDetection
             GaussianSharpen gausianSharpenFilter = new GaussianSharpen();
             capturedColorImage = gamaFilter.Apply(capturedColorImage);
             capturedColorImage = contrastFilter.Apply(capturedColorImage);
-            workingImage = capturedColorImage;
-            capturedImagePanel.Image = (Bitmap)workingImage;
+            capturedImagePanel.Image = (Bitmap)capturedColorImage;
         }
         public Bitmap grayscaleImageConvert(Bitmap colorImage)
         {
@@ -133,7 +136,7 @@ namespace blobDetection
             workingFrame.UnlockBits(bmpData);
 
             //Identifing the Blobs in target picture
-            BlobCounter blobCounter = new BlobCounter();
+            AForge.Imaging.BlobCounter blobCounter = new AForge.Imaging.BlobCounter();
 
             blobCounter.FilterBlobs = true;
 
@@ -143,11 +146,11 @@ namespace blobDetection
             blobCounter.MaxWidth = Max;
 
             blobCounter.ProcessImage(bmpData);
-            Blob[] blobs = blobCounter.GetObjectsInformation();
+            AForge.Imaging.Blob[] blobs = blobCounter.GetObjectsInformation();
 
 
             //Classifying the objects{}
-            AForge.Math.Geometry.SimpleShapeChecker shapeCheck = new SimpleShapeChecker();
+            SimpleShapeChecker shapeCheck = new SimpleShapeChecker();
             Bitmap tempBitmap = new Bitmap(workingFrame.Width, workingFrame.Height);
             Graphics g = Graphics.FromImage(tempBitmap);
             g.DrawImage(workingFrame, 0, 0);
@@ -155,7 +158,7 @@ namespace blobDetection
             int blobLength = blobs.Length;
             for (int i = 0; i < blobLength; i++)
             {
-                List<IntPoint> edgePoints = blobCounter.GetBlobsEdgePoints(blobs[i]);
+                List<AForge.IntPoint> edgePoints = blobCounter.GetBlobsEdgePoints(blobs[i]);
                 AForge.Point center;
                 float radius;
 
@@ -168,7 +171,7 @@ namespace blobDetection
                 }
                 else
                 {
-                    List<IntPoint> corners = new List<IntPoint>();
+                    List<AForge.IntPoint> corners = new List<AForge.IntPoint>();
                     if (edgePoints.Count > 1)
                     {
                         corners = PointsCloud.FindQuadrilateralCorners(edgePoints);
@@ -195,7 +198,7 @@ namespace blobDetection
             }
             return tempBitmap;
         }
-
+       
         public Bitmap extractHistogramData(System.Drawing.Image inImage, int inVerticalStartRow, int inVerticalRowGap, int inHorizontalStartRow,int inHorizontalRowGap, int inAvergingConstant, Color inVerticalColor, Color inHorizontalColor)
         {
 
@@ -384,7 +387,8 @@ namespace blobDetection
 
         private void blobDetect_Click(object sender, EventArgs e)
         {
-            processWorkingImage((Bitmap)workingImage.Clone());
+            //processWorkingImage((Bitmap)workingImage.Clone());
+            captureImage();
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             detectBlobs(grayImage);
         }
@@ -486,7 +490,7 @@ namespace blobDetection
             
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            bwBoundryRangeCheckbox.Image = blobDetection(blackandwhiteImage, (blobDetectionForm.Maximum - blobDetectionForm.Value), blackandwhiteBlobMaxSlider.Value);
+            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blobDetectionForm.Maximum - blobDetectionForm.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void blackandwhiteBlobMaxSlider_Scroll(object sender, ScrollEventArgs e)
@@ -494,14 +498,14 @@ namespace blobDetection
             
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            bwBoundryRangeCheckbox.Image = blobDetection(blackandwhiteImage, (blobDetectionForm.Maximum - blobDetectionForm.Value), blackandwhiteBlobMaxSlider.Value);
+            blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blobDetectionForm.Maximum - blobDetectionForm.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
         private void gamaSlider1_Scroll(object sender, ScrollEventArgs e)
         {
-            Bitmap modifiedImage = (Bitmap)workingImage.Clone();
-            processWorkingImage(modifiedImage);
-            capturedImagePanel.Image = (Bitmap)workingImage.Clone();
+            
+            processWorkingImage((Bitmap)workingImage.Clone());
+            //capturedImagePanel.Image = (Bitmap)workingImage.Clone();
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
@@ -513,7 +517,7 @@ namespace blobDetection
         private void contrastSlider_Scroll(object sender, ScrollEventArgs e)
         {
             processWorkingImage((Bitmap)workingImage.Clone());
-            capturedImagePanel.Image = (Bitmap)workingImage.Clone();
+            //capturedImagePanel.Image = (Bitmap)workingImage.Clone();
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
             Bitmap cannyImage = cannyImageConvert(grayImage);
@@ -652,6 +656,7 @@ namespace blobDetection
             float[] avgHorizontalValues = new float[(int)(horizontalPixelValues.Length / averagingConstant)];
             int avgVerticalValuesIndexPosition = 0;
             int avgHorizontalValuesIndexPosition = 0;
+            double averageDegreeTilt = 0;
             List<int> verticalZeroValues = new List<int>();
             List<int> horizontalZeroValues = new List<int>();
             int verticalMidpoint = 0;
@@ -740,14 +745,18 @@ namespace blobDetection
                     }
                 }
             }
-            label21.Text = horizontalAlignment(centerPoint, (int)rowGapNUD.Value, 3, tempBitmap,imageData).ToString();
+            for (int c = 0; c < 10; c++)
+            {
+               averageDegreeTilt += horizontalAlignment(centerPoint, (int)rowGapNUD.Value, 3, tempBitmap, imageData);
+            }
+            label21.Text = (averageDegreeTilt/ 10.0).ToString();
             return tempBitmap;
 
         }
         public double horizontalAlignment(System.Drawing.Point inCenter,int inDistanceFromCenter,int numRows,Bitmap inImage,Byte[] inImageData)
-    {
+        {
             float xValue = inCenter.X;
-            
+
             int topLine = (int)inCenter.X - inDistanceFromCenter;
             int bottomLine = (int)inCenter.X + inDistanceFromCenter;
             int topIndexFirstBlackPixel = 0;
@@ -756,6 +765,8 @@ namespace blobDetection
             int height = inImage.Height;
             int topAverage = 0;
             int bottomAverage = 0;
+            List<int> topBlackArea = new List<int>();
+            List<int> bottomBlackArea = new List<int>();
             float[] topLineValues = new float[width - 1];
             float[] bottomLineValues = new float[width - 1];
             Bitmap imageClone = (Bitmap)inImage;
@@ -768,61 +779,88 @@ namespace blobDetection
             imageClone.UnlockBits(imageData);
             Graphics g = Graphics.FromImage(inImage);
             Pen greenPen = new Pen(Color.Green, 5.0f);
-            g.DrawLine(greenPen,0,topLine,width,topLine);
+            g.DrawLine(greenPen, 0, topLine, width, topLine);
             g.DrawLine(greenPen, 0, bottomLine, width, bottomLine);
 
-            if (topLine > 0 && bottomLine > 0&&bottomLine<height&&topLine<height)
+            if (topLine > 0 && bottomLine > 0 && bottomLine < height && topLine < height)
             {
 
-                for (int i = 0; i < width - 1; i++)
-                {
-                    for (int rowOffset = 0; rowOffset < numRows; rowOffset++)
-                    {
-                        topAverage += inImageData[((topLine - rowOffset) * width) + i];
-                        bottomAverage += inImageData[((bottomLine + rowOffset) * width) + i];
-                    }
-                    topAverage /= numRows;
-                    bottomAverage /= numRows;
-                    topLineValues[i] = topAverage;
-                    bottomLineValues[i] = bottomAverage;
-                    topAverage = 0;
-                    bottomAverage = 0;
-                }
                 //for (int i = 0; i < width - 1; i++)
                 //{
-                //    topLineValues[i] = inImageData[(topLine * width) + i];
-                //    bottomLineValues[i] = inImageData[(bottomLine * width) + i];
+                //    for (int rowOffset = 0; rowOffset < numRows; rowOffset++)
+                //    {
+                //        topAverage += inImageData[((topLine - rowOffset) * width) + i];
+                //        bottomAverage += inImageData[((bottomLine + rowOffset) * width) + i];
+                //    }
+                //    topAverage /= numRows;
+                //    bottomAverage /= numRows;
+                //    topLineValues[i] = topAverage;
+                //    bottomLineValues[i] = bottomAverage;
+                //    topAverage = 0;
+                //    bottomAverage = 0;
                 //}
+                for (int i = 0; i < width - 1; i++)
+                {
+                    topLineValues[i] = inImageData[(topLine * width) + i];
+                    bottomLineValues[i] = inImageData[(bottomLine * width) + i];
+                }
             }
             for (int j = 0; j < topLineValues.Length; j++)
             {
-              
-                if (topLineValues[j] == 255)
+
+                if (topLineValues[j] == 0)
                 {
-                    topIndexFirstBlackPixel = j;
-                    break;
+                    topBlackArea.Add(j);
+                }
+                if (topLineValues[j] == 0 && (j + 1) < topLineValues.Length && topLineValues[j + 1] == 255)
+                {
+                    if (topBlackArea.Count < 15)
+                    {
+                        topBlackArea.Clear();
+                    }
+                    else
+                    {
+                        break;
+                    }
+
                 }
             }
             for (int k = 0; k < bottomLineValues.Length; k++)
             {
-                if (bottomLineValues[k] == 255)
+                if (bottomLineValues[k] == 0)
                 {
-                    bottomIndexFirstBlackPixel = k;
-                    break;
+                    bottomBlackArea.Add(k);
                 }
+                if (bottomLineValues[k] == 0 && (k + 1) < bottomLineValues.Length && bottomLineValues[k + 1] == 255)
+                {
+                    if (bottomBlackArea.Count < 15)
+                    {
+                        bottomBlackArea.Clear();
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+
             }
-           
+            if (topBlackArea.Count > 0 && bottomBlackArea.Count > 0)
+            {
+                topIndexFirstBlackPixel = topBlackArea[0];
+                bottomIndexFirstBlackPixel = bottomBlackArea[0];
+            }
             int deltaX = Math.Abs(topIndexFirstBlackPixel - bottomIndexFirstBlackPixel);
             if (deltaX != 0)
             {
-                double ratio = (double)(inDistanceFromCenter*2.0) / deltaX;
+                double ratio = (double)(inDistanceFromCenter * 2.0) / deltaX;
                 double radianTurn = Math.Atan(ratio);
                 double degreeTurn = 90 - (radianTurn * (180.0 / Math.PI));
                 return degreeTurn;
             }
 
             return 0.0;
-
+           
         }
 
         private void horizontalHistogramCheckboxCanny_CheckedChanged(object sender, EventArgs e)
@@ -910,6 +948,11 @@ namespace blobDetection
             capturedImagePanel.Image = orignalImage;
             Bitmap grayImage = grayscaleImageConvert(orignalImage);
             detectBlobs(grayImage);
+        }
+
+        private void capturedImagePanel_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

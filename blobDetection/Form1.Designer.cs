@@ -379,7 +379,7 @@
             // cannyMinSlider
             // 
             this.cannyMinSlider.Location = new System.Drawing.Point(680, 309);
-            this.cannyMinSlider.Maximum = 80;
+            this.cannyMinSlider.Maximum = 59;
             this.cannyMinSlider.Minimum = 20;
             this.cannyMinSlider.Name = "cannyMinSlider";
             this.cannyMinSlider.Size = new System.Drawing.Size(237, 17);
@@ -411,7 +411,7 @@
             // 
             this.cannyMaxSlider.Location = new System.Drawing.Point(675, 341);
             this.cannyMaxSlider.Maximum = 200;
-            this.cannyMaxSlider.Minimum = 81;
+            this.cannyMaxSlider.Minimum = 60;
             this.cannyMaxSlider.Name = "cannyMaxSlider";
             this.cannyMaxSlider.Size = new System.Drawing.Size(242, 17);
             this.cannyMaxSlider.TabIndex = 27;
@@ -589,6 +589,7 @@
             this.capturedImagePanel.Size = new System.Drawing.Size(305, 245);
             this.capturedImagePanel.TabIndex = 46;
             this.capturedImagePanel.Zoom = 1F;
+            this.capturedImagePanel.Load += new System.EventHandler(this.capturedImagePanel_Load);
             // 
             // grayScalePanel
             // 
