@@ -382,6 +382,7 @@ namespace blobDetection
             Bitmap cannyImage = cannyImageConvert(grayImage);
             grayBlobPanel.Image = blobDetection(grayImage, (grayBlobMinSlider.Maximum - grayBlobMinSlider.Value), grayBlobMaxSlider.Value);
             cannyBlobPanel.Image = blobDetection(cannyImage, (cannyBlobMinSlider.Maximum - cannyBlobMinSlider.Value), cannyBlobMaxSlider.Value);
+            //blackandwhiteBlobPanel.Image = createHoughLines(cannyImage,.8);
             blackandwhiteBlobPanel.Image = blobDetection(blackandwhiteImage, (blobDetectionForm.Maximum - blobDetectionForm.Value), blackandwhiteBlobMaxSlider.Value);
         }
 
@@ -601,8 +602,10 @@ namespace blobDetection
         {
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            blackandwhiteVerticalHistogramSlider.Maximum = 480 - ((int)blackandwhiteVerticalNumRowNUD.Value * 10);
-            blackandwhiteHorizontalHistogramSlider.Maximum = 640 - ((int)blackandwhiteHorizontalRowGapNUD.Value*10);
+            
+            blackandwhiteVerticalHistogramSlider.Maximum = grayImage.Width - ((int)blackandwhiteVerticalNumRowNUD.Value);
+            blackandwhiteHorizontalHistogramSlider.Maximum = grayImage.Height - ((int)blackandwhiteHorizontalRowGapNUD.Value);
+            //blackandwhiteVerticalHistogramSlider.Value = grayImage.Height / 2;
             blackandwhitePanel.Image = extractHistogramData(blackandwhiteImage, (int)blackandwhiteVerticalHistogramSlider.Value, (int)blackandwhiteVerticalNumRowNUD.Value,blackandwhiteHorizontalHistogramSlider.Value,(int)blackandwhiteHorizontalRowGapNUD.Value, (int)bwAveragingConstantNUD.Value, blackandwhiteVerticalColor, blackandwhiteHorizontalColor);
         }
 
@@ -619,8 +622,10 @@ namespace blobDetection
         {
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
             Bitmap blackandwhiteImage = blackandWhiteImageConvert(grayImage);
-            blackandwhiteVerticalHistogramSlider.Maximum = 480 - ((int)blackandwhiteVerticalNumRowNUD.Value * 10);
-            blackandwhiteHorizontalHistogramSlider.Maximum = 630 - ((int)blackandwhiteHorizontalRowGapNUD.Value * 10);
+            
+            blackandwhiteVerticalHistogramSlider.Maximum = grayImage.Width - ((int)blackandwhiteVerticalNumRowNUD.Value);
+            blackandwhiteHorizontalHistogramSlider.Maximum = grayImage.Height- ((int)blackandwhiteHorizontalRowGapNUD.Value);
+            //blackandwhiteHorizontalHistogramSlider.Value = (grayImage.Width / 2 )- ((int)blackandwhiteHorizontalRowGapNUD.Value * 10);
             blackandwhitePanel.Image = extractHistogramData(blackandwhiteImage, (int)blackandwhiteVerticalHistogramSlider.Value, (int)blackandwhiteVerticalNumRowNUD.Value, blackandwhiteHorizontalHistogramSlider.Value, (int)blackandwhiteHorizontalRowGapNUD.Value, (int)bwAveragingConstantNUD.Value, blackandwhiteVerticalColor, blackandwhiteHorizontalColor);
         }
 
@@ -639,7 +644,9 @@ namespace blobDetection
 
             processWorkingImage(captureImage());
             Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
+            Bitmap cannyImage = cannyImageConvert(grayImage);
             detectBlobs(grayImage);
+            angleDetectionPanel.Image = createHoughLines(cannyImage, (houghIntensityScrollBar.Value / 100.0));
             if (blackandwhiteHistogramToggle % 2 == 0)
             {
                 createBlackandWhiteHistogram();
@@ -756,19 +763,36 @@ namespace blobDetection
         public double horizontalAlignment(System.Drawing.Point inCenter,int inDistanceFromCenter,int numRows,Bitmap inImage,Byte[] inImageData)
         {
             float xValue = inCenter.X;
+            float yValue = inCenter.Y;
+            int width = inImage.Width;
+            int height = inImage.Height;
+            int leftLine = (int)inCenter.Y - inDistanceFromCenter;
+            int rightLine = (int)inCenter.Y + inDistanceFromCenter;
+            int leftIndexFirstBlackPixel = 0;
+            int rightIndexFirstBlackPixel = 0;
+            int leftIndexLastBlackPixel = height - 1;
+            int rightIndexLastBlackPixel = height - 1;
 
             int topLine = (int)inCenter.X - inDistanceFromCenter;
             int bottomLine = (int)inCenter.X + inDistanceFromCenter;
             int topIndexFirstBlackPixel = 0;
             int bottomIndexFirstBlackPixel = 0;
-            int width = inImage.Width;
-            int height = inImage.Height;
+            int topIndexLastBlackPixel = width - 1;
+            int bottomIndexLastBlackPixel = width - 1;
+
             int topAverage = 0;
             int bottomAverage = 0;
+
             List<int> topBlackArea = new List<int>();
             List<int> bottomBlackArea = new List<int>();
+            List<int> leftBlackArea = new List<int>();
+            List<int> rightBlackArea = new List<int>();
+
             float[] topLineValues = new float[width - 1];
             float[] bottomLineValues = new float[width - 1];
+            float[] leftLineValues = new float[height - 1];
+            float[] rightLineValues = new float[height - 1];
+
             Bitmap imageClone = (Bitmap)inImage;
             Rectangle imageRectangle = new Rectangle(0, 0, width, height);
             System.Drawing.Imaging.BitmapData imageData = imageClone.LockBits(imageRectangle, System.Drawing.Imaging.ImageLockMode.ReadWrite, imageClone.PixelFormat);
@@ -779,10 +803,13 @@ namespace blobDetection
             imageClone.UnlockBits(imageData);
             Graphics g = Graphics.FromImage(inImage);
             Pen greenPen = new Pen(Color.Green, 5.0f);
+            Pen orangePen = new Pen(Color.Orange, 5.0f);
             g.DrawLine(greenPen, 0, topLine, width, topLine);
             g.DrawLine(greenPen, 0, bottomLine, width, bottomLine);
+            g.DrawLine(greenPen, leftLine, 0, leftLine, height);
+            g.DrawLine(greenPen, rightLine, 0, rightLine, height);
 
-            if (topLine > 0 && bottomLine > 0 && bottomLine < height && topLine < height)
+            if (topLine > 0 && bottomLine > 0 && bottomLine < height && topLine < height && leftLine > 0 && rightLine > 0&&leftLine<width&&rightLine<width)
             {
 
                 //for (int i = 0; i < width - 1; i++)
@@ -803,6 +830,11 @@ namespace blobDetection
                 {
                     topLineValues[i] = inImageData[(topLine * width) + i];
                     bottomLineValues[i] = inImageData[(bottomLine * width) + i];
+                }
+                for (int a = 0; a < height - 1; a++)
+                {
+                    leftLineValues[a] = inImageData[(leftLine) + (width * a)];
+                    rightLineValues[a] = inImageData[rightLine + (width * a)];
                 }
             }
             for (int j = 0; j < topLineValues.Length; j++)
@@ -845,18 +877,72 @@ namespace blobDetection
                 }
 
             }
-            if (topBlackArea.Count > 0 && bottomBlackArea.Count > 0)
+            for (int h = 0; h < leftLineValues.Length; h++)
+            {
+                if (leftLineValues[h] == 0)
+                {
+                    leftBlackArea.Add(h);
+                }
+                if (leftLineValues[h] == 0 && (h + 1) < leftLineValues.Length && leftLineValues[h + 1] == 255)
+                {
+                    if (leftBlackArea.Count < 15)
+                    {
+                        leftBlackArea.Clear();
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+            }
+            for (int h = 0; h < rightLineValues.Length; h++)
+            {
+                if (rightLineValues[h] == 0)
+                {
+                    rightBlackArea.Add(h);
+                }
+                if (rightLineValues[h] == 0 && (h + 1) < rightLineValues.Length && rightLineValues[h + 1] == 255)
+                {
+                    if (rightBlackArea.Count < 15)
+                    {
+                        rightBlackArea.Clear();
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                }
+            }
+
+
+            if (topBlackArea.Count > 0 && bottomBlackArea.Count > 0&&leftBlackArea.Count>0&&rightBlackArea.Count>0)
             {
                 topIndexFirstBlackPixel = topBlackArea[0];
                 bottomIndexFirstBlackPixel = bottomBlackArea[0];
+                leftIndexFirstBlackPixel = leftBlackArea[0];
+                rightIndexFirstBlackPixel = rightBlackArea[0];
+
+                leftIndexLastBlackPixel = leftBlackArea[leftBlackArea.Count - 1];
+                rightIndexLastBlackPixel = rightBlackArea[rightBlackArea.Count - 1];
+                topIndexLastBlackPixel = topBlackArea[topBlackArea.Count - 1];
+                bottomIndexLastBlackPixel = bottomBlackArea[bottomBlackArea.Count - 1];
+
             }
+
+            g.DrawEllipse(orangePen,topIndexFirstBlackPixel,leftIndexFirstBlackPixel,2,2);
+            g.DrawEllipse(orangePen, bottomIndexFirstBlackPixel, leftIndexLastBlackPixel, 2, 2);
+            g.DrawEllipse(orangePen, topIndexLastBlackPixel, rightIndexFirstBlackPixel, 2, 2);
+            g.DrawEllipse(orangePen, bottomIndexLastBlackPixel, rightIndexLastBlackPixel, 2, 2);
+
             int deltaX = Math.Abs(topIndexFirstBlackPixel - bottomIndexFirstBlackPixel);
             if (deltaX != 0)
             {
                 double ratio = (double)(inDistanceFromCenter * 2.0) / deltaX;
                 double radianTurn = Math.Atan(ratio);
                 double degreeTurn = 90 - (radianTurn * (180.0 / Math.PI));
-                return degreeTurn;
+                 return degreeTurn;
             }
 
             return 0.0;
@@ -951,6 +1037,145 @@ namespace blobDetection
         }
 
         private void capturedImagePanel_Load(object sender, EventArgs e)
+        {
+
+        }
+        public Bitmap createHoughLines(Bitmap inImage, double inIntensity)
+        {
+            AForge.Imaging.HoughLineTransformation lineTransform = new AForge.Imaging.HoughLineTransformation();
+            lineTransform.ProcessImage(inImage);
+            Bitmap tempBitmap = new Bitmap(inImage.Width, inImage.Height);
+            Graphics g = Graphics.FromImage(tempBitmap);
+            g.DrawImage(inImage,0,0);
+            Pen bluePen = new Pen(Color.Blue, 2.0f);
+            Bitmap completedImage = lineTransform.ToBitmap();
+            AForge.Imaging.HoughLine[] lines = lineTransform.GetLinesByRelativeIntensity(inIntensity);
+
+            foreach (AForge.Imaging.HoughLine line in lines)
+            {
+                int lineRadius = line.Radius;
+                double lineTheta = line.Theta;
+
+                if (lineRadius < 0)
+                {
+                    lineTheta += 180;
+                    lineRadius = -lineRadius;
+                }
+                
+                lineTheta = (lineTheta / 180) * Math.PI;
+                int halfWidth = inImage.Width / 2;
+                int halfHeight = inImage.Height / 2;
+
+                double firstX = 0, lastX = 0, firstY = 0, lastY = 0;
+
+                if (line.Theta != 0)
+                {
+                    firstX = -halfWidth;
+                    lastX = halfWidth;
+
+                    firstY = (-Math.Cos(lineTheta) * firstX + lineRadius) / Math.Sin(lineTheta);
+                    lastY = (-Math.Cos(lineTheta) * lastX + lineRadius) / Math.Sin(lineTheta);
+                }
+                else
+                {
+                    firstX = line.Radius;
+                    lastX = line.Radius;
+
+                    firstY = halfHeight;
+                    lastY = -halfHeight;
+                }
+                
+                double partRotationAngle = 90.0- (double)(line.Theta);
+                if (partRotationAngle < 0)
+                    partRotationAngle += 90;
+                        
+                if (partRotationAngle == 90)
+                    partRotationAngle = 0;
+                label25.Text = partRotationAngle.ToString();
+                g.DrawLine(bluePen,new System.Drawing.Point((int)(firstX+halfWidth),(int)(halfHeight-firstY)),new System.Drawing.Point((int) (lastX+halfWidth),(int) (halfHeight-lastY)));
+            }
+            return tempBitmap;
+        }
+
+        private void houghLineTransformBtn_Click(object sender, EventArgs e)
+        {
+            Bitmap grayImage = grayscaleImageConvert((Bitmap)workingImage.Clone());
+            Bitmap cannyImage = cannyImageConvert(grayImage);
+            angleDetectionPanel.Image = createHoughLines(cannyImage, (houghIntensityScrollBar.Value / 100.0));
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void blackandwhiteBlobDetectionLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grayBlobPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gamaSlider_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void greyScaleBlobLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cannyBlobDetection_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cannyBlobPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
         {
 
         }
